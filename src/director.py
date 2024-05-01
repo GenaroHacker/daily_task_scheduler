@@ -71,7 +71,7 @@ class Director:
     def open_webpage(self, url):
         self._execute_command(['xdg-open', url])
 
-    def play_sound(self, sound="beep.wav"):
+    def play_sound(self, sound="beeps.wav"):
         sound_path = os.path.join(self.SOUNDS_DIR, sound)
         self._execute_command(['aplay', sound_path])
 
