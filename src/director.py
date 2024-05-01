@@ -3,6 +3,8 @@ import subprocess
 import random
 import sqlite3
 from time import sleep
+import sys
+import time
 
 class Director:
     DB_PATH = os.path.join('assets', 'data', 'projects.db')
@@ -40,7 +42,17 @@ class Director:
             print(f"Command failed: {e}")
 
     def sleep(self, minutes=0, seconds=0):
-        sleep(minutes * 60 + seconds)
+        total_seconds = minutes * 60 + seconds
+        interval = total_seconds / 40  # Compute the interval for updating the progress bar
+
+        for i in range(1, 41):
+            time.sleep(interval)
+            progress = '#' * i  # Completed portion
+            remaining = '-' * (40 - i)  # Pending portion
+            sys.stdout.write('\r[{}]'.format(progress + remaining))  # Overwrite the current line
+            sys.stdout.flush()
+
+        print()  # Move to the next line after completion
 
     def clear(self):
         self._execute_command('clear', shell=True)
