@@ -57,9 +57,15 @@ class Director:
     def clear(self):
         self._execute_command('clear', shell=True)
 
-    def run_sh_script(self, script_name):
+    def run_script(self, script_name):
         script_path = os.path.join(self.SCRIPTS_DIR, script_name)
-        self._execute_command(['/bin/bash', script_path])
+        if script_name.endswith('.sh'):
+            command = ['/bin/bash', script_path]
+        elif script_name.endswith('.py'):
+            command = ['python', script_path]
+        else:
+            raise ValueError("Unsupported script extension")
+        self._execute_command(command)
 
     def execute_sh_command(self, command):
         self._execute_command(command, shell=True)
@@ -151,9 +157,9 @@ class Director:
 if __name__ == '__main__':
     director = Director()
     director.clear()
-    director.sleep(seconds=5)
+    director.sleep(seconds=0.1)
     director.play_sound()
-    director.run_sh_script('example.sh')
+    director.run_script('example.sh')
     director.open_webpage("http://example.com")
     director.execute_sh_command('ls')
     director.start_new_project('Sample Project', 'Initial Setup')
