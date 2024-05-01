@@ -60,12 +60,17 @@ class Director:
     def run_script(self, script_name):
         script_path = os.path.join(self.SCRIPTS_DIR, script_name)
         if script_name.endswith('.sh'):
-            command = ['/bin/bash', script_path]
+            self._execute_shell_script(script_path)
         elif script_name.endswith('.py'):
-            command = ['python', script_path]
+            self._execute_python_script(script_path)
         else:
             raise ValueError("Unsupported script extension")
-        self._execute_command(command)
+
+    def _execute_shell_script(self, script_path):
+        os.system(f"bash {script_path}")
+
+    def _execute_python_script(self, script_path):
+        os.system(f"python3 {script_path}")
 
     def execute_sh_command(self, command):
         self._execute_command(command, shell=True)
@@ -77,7 +82,7 @@ class Director:
     def open_webpage(self, url):
         self._execute_command(['xdg-open', url])
 
-    def play_sound(self, sound="beeps.wav"):
+    def play_sound(self, sound="alarm.wav"):
         sound_path = os.path.join(self.SOUNDS_DIR, sound)
         self._execute_command(['aplay', sound_path])
 
