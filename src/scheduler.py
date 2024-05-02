@@ -24,7 +24,8 @@ class DailyTaskScheduler:
         """
         self.schedule = schedule
         self.functions = functions
-        self.state_file = "state.json"  # File to store the state
+        self.state_file = os.path.join('assets', 'data', 'state.json')
+        os.makedirs(os.path.dirname(self.state_file), exist_ok=True)
 
     def update_state(self, index):
         """
