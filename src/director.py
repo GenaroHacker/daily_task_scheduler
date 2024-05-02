@@ -1,6 +1,7 @@
-from src.director_modules.projectdatabasemanager import ProjectDatabaseManager
-from src.director_modules.scriptcommandexecutor import ScriptCommandExecutor
+from src.director_modules.project_manager import ProjectDatabaseManager
+from src.director_modules.code_executor import ScriptCommandExecutor
 from src.director_modules.uihelper import UIHelper
+import os
 
 class Director(ProjectDatabaseManager, ScriptCommandExecutor, UIHelper):
     def __init__(self):
@@ -8,17 +9,9 @@ class Director(ProjectDatabaseManager, ScriptCommandExecutor, UIHelper):
         ScriptCommandExecutor.__init__(self)
         UIHelper.__init__(self)
 
-    def manage_project(self, project_name, first_step):
-        if self.start_new_project(project_name, first_step):
-            print("Project management started.")
-        else:
-            print("Failed to start project management.")
+    def play_sound(self, sound="alarm.wav"):
+        sound_path = os.path.join(self.SOUNDS_DIR, sound)
+        self.execute_command(['aplay', sound_path])
 
-    def deploy_project(self, script_name):
-        print("Preparing to deploy project...")
-        self.run_script(script_name)
-        print("Deployment completed.")
-
-    def monitor_progress(self, project):
-        print("Monitoring progress for project:", project)
-        self.make_progress(project)
+    def open_webpage(self, url):
+        self.execute_command(['xdg-open', url])
