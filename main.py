@@ -12,7 +12,7 @@ if __name__ == '__main__':
     director.execute_command('ls')
     director.start_new_project('Sample Project', 'Initial Setup')
     director.make_progress('Sample Project')
-
+    director.print("Hello, world! This is an example with a very long sentence to test line breaking without cutting words short. Enjoy reading slowly.\nNew lines are properly handled with adaptive delay.")
     
     # Define functions
     @track_function
