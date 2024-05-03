@@ -1,5 +1,6 @@
 from src.director import Director
 from src.scheduler import DailyTaskScheduler
+from src.decorator import track_function
 
 if __name__ == '__main__':
     director = Director()
@@ -15,18 +16,23 @@ if __name__ == '__main__':
 
 if __name__ == "__main__":
     # Define functions
+    @track_function
     def function_A():
         print("Executing function A")
 
+    @track_function
     def function_B():
         print("Executing function B")
 
+    @track_function
     def function_C():
         print("Executing function C")
 
+    @track_function
     def function_D():
         print("Executing function D")
 
+    @track_function
     def function_E():
         print("Executing function E")
 
