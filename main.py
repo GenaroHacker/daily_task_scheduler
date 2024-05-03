@@ -13,8 +13,7 @@ if __name__ == '__main__':
     director.start_new_project('Sample Project', 'Initial Setup')
     director.make_progress('Sample Project')
 
-
-if __name__ == "__main__":
+    
     # Define functions
     @track_function
     def function_A():
