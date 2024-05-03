@@ -45,8 +45,3 @@ class DynamicTextPrinter:
             if lines[-1] != line:
                 time.sleep(self._deviate(self._text_strategy('', 0, True) * speed_scale))
 
-# Example usage
-if __name__ == "__main__":
-    printer = DynamicTextPrinter(max_line_length=150)
-    text = "Hello, world! This is an example with a very long sentence to test line breaking without cutting words short. Enjoy reading slowly.\nNew lines are properly handled with adaptive delay."
-    printer.print(text, speed_scale=0.3)
