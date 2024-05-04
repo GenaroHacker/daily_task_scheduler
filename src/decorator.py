@@ -22,7 +22,7 @@ class FunctionTracker:
             self.handle_exception(e)
             return
         finally:
-            self.prompt_continue("Press Enter to continue...")
+            self.prompt_continue("\033[92mTask completed! Press Enter to continue...\033[0m")
 
         end_time = datetime.now()
         self.log_action("completed", end_time)
