@@ -28,6 +28,7 @@ class FunctionTracker:
         self.log_action("completed", end_time)
         duration = (end_time - start_time).total_seconds()
         self.report_time_taken(duration)
+        os.system('clear')
         return result
 
     def prepare_db(self):
