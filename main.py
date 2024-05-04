@@ -40,22 +40,49 @@ if __name__ == '__main__':
         d.print("Open your email inbox and mark the spam messages by blocking the sender.\n\n")
         input()
 
+    @track_function
+    def pomodoro_session():
+        d.print("You are going to start a Pomodoro session.\n\n")
+        time.sleep(0.5)
+        d.print("The total time expected to complete is two and a half hours.\n\n")
+        time.sleep(0.5)
+        d.print("Grab your study materials and and a highlighter.\n\nThen, press enter to start the first focus block.\n\n")
+        input()
+        d.clear()
+        for i in ["first", "second", "third", "fourth", "last"]:
+            d.print(f"The {i} focus block starts now.\n\n")
+            d.play_sound(sound="beeps.wav")
+            d.sleep(minutes=25)
+            d.play_sound(sound="alarm.wav")
+            d.print(f"The {i} focus block is over.\n\n")
+            time.sleep(0.5)
+            if i != "last":
+                d.print("Take a short break for five minutes.\n\n")
+                d.sleep(minutes=5)
+            else:
+                d.print("Take a long break for ten minutes.\n\n")
+                d.sleep(minutes=10)
+        d.print("Congratulations! You have completed a full Pomodoro session.\n\n")
+        d.print("Press enter to continue with the next task in your schedule.\n\n")
+        input()
+
     # Map functions to function keys
     functions = {
         'coffee': coffee,
         'desk': organize_desk,
-        'files': organize_digital_files
+        'files': organize_digital_files,
+        'pomodoro': pomodoro_session
     }
 
     # Define weekly schedule using function keys
     weekly_schedule = {
-        0: ['coffee', 'desk'],  # Monday
-        1: ['coffee', 'files'], # Tuesday
-        2: ['coffee', 'files'], # Wednesday
-        3: ['coffee', 'desk'],  # Thursday
-        4: ['coffee', 'desk'],  # Friday
-        5: ['coffee', 'files'], # Saturday
-        6: ['coffee', 'files']  # Sunday
+        0: ['coffee', 'desk'],      # Monday
+        1: ['coffee', 'files'],     # Tuesday
+        2: ['coffee', 'files'],     # Wednesday
+        3: ['coffee', 'desk'],      # Thursday
+        4: ['coffee', 'desk'],      # Friday
+        5: ['coffee', 'pomodoro'],  # Saturday
+        6: ['coffee', 'files']      # Sunday
     }
 
     scheduler = DailyTaskScheduler(weekly_schedule, functions)
