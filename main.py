@@ -49,13 +49,13 @@ if __name__ == '__main__':
 
     # Define weekly schedule using function keys
     weekly_schedule = {
-        0: ['coffee'],          # Monday
-        1: ['coffee', 'desk'],  # Tuesday
+        0: ['coffee', 'desk'],  # Monday
+        1: ['coffee', 'files'], # Tuesday
         2: ['coffee', 'files'], # Wednesday
-        3: ['coffee'],          # Thursday
+        3: ['coffee', 'desk'],  # Thursday
         4: ['coffee', 'desk'],  # Friday
-        5: ['coffee'],          # Saturday
-        6: ['coffee']           # Sunday
+        5: ['coffee', 'files'], # Saturday
+        6: ['coffee', 'files']  # Sunday
     }
 
     scheduler = DailyTaskScheduler(weekly_schedule, functions)
