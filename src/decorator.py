@@ -15,11 +15,13 @@ class FunctionTracker:
         if self.user_decides_to_skip():
             return
         start_time = datetime.now()
-        self.log_action("started", start_time)
+        if not self.log_action("started", start_time):
+            print("Error: Previous function did not complete properly.")
+            return
         try:
             result = self.func(*args, **kwargs)
         except Exception as e:
-            self.handle_exception(e)
+            self.handle_exception(e, start_time)
             return
         finally:
             self.prompt_continue("\033[92mTask completed! Press Enter to continue...\033[0m")
@@ -28,15 +30,21 @@ class FunctionTracker:
         self.log_action("completed", end_time)
         duration = (end_time - start_time).total_seconds()
         self.report_time_taken(duration)
+        time.sleep(2)
         os.system('clear')
         return result
 
     def prepare_db(self):
         with sqlite3.connect(self.DB_PATH) as conn:
             cursor = conn.cursor()
-            # Use a single query to check for and optionally delete the last "started" entry
+            # Ensure table exists and is ready for transactions
             cursor.execute("""
-            DELETE FROM events WHERE id = (SELECT id FROM events WHERE action = 'started' ORDER BY id DESC LIMIT 1)
+            CREATE TABLE IF NOT EXISTS events (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                function TEXT,
+                action TEXT,
+                timestamp TEXT
+            );
             """)
             conn.commit()
 
@@ -50,19 +58,19 @@ class FunctionTracker:
     def log_action(self, action, timestamp):
         with sqlite3.connect(self.DB_PATH) as conn:
             cursor = conn.cursor()
+            if action == "started":
+                cursor.execute("SELECT action FROM events WHERE function = ? ORDER BY id DESC LIMIT 1", (self.func.__name__,))
+                last_action = cursor.fetchone()
+                if last_action and last_action[0] != 'completed':
+                    return False
             cursor.execute("INSERT INTO events (function, action, timestamp) VALUES (?, ?, ?)",
                            (self.func.__name__, action, timestamp.isoformat()))
             conn.commit()
+        return True
 
-    def handle_exception(self, exception):
+    def handle_exception(self, exception, start_time):
         print(f"An error occurred: {exception}")
-        with sqlite3.connect(self.DB_PATH) as conn:
-            cursor = conn.cursor()
-            cursor.execute("""
-            DELETE FROM events WHERE id = (SELECT id FROM events WHERE function = ? AND action = 'started' ORDER BY id DESC LIMIT 1)
-            """, (self.func.__name__,))
-            conn.commit()
-        input("An error has occurred. Press Enter to continue...")
+        self.log_action("failed", start_time)
 
     def prompt_continue(self, message):
         input(message)
@@ -90,4 +98,3 @@ class FunctionTracker:
 
 def track_function(func):
     return FunctionTracker(func)
-
