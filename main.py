@@ -48,7 +48,6 @@ if __name__ == '__main__':
         time.sleep(0.5)
         d.print("Grab your study materials and and a highlighter.\n\nThen, press enter to start the first focus block.\n\n")
         input()
-        d.clear()
         for i in ["first", "second", "third", "fourth", "last"]:
             d.print(f"The {i} focus block starts now.\n\n")
             d.play_sound(sound="beeps.wav")
