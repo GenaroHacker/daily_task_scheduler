@@ -3,7 +3,7 @@ from src.scheduler import DailyTaskScheduler
 from src.decorator import track_function
 import time
 
-if __name__ != '__main__':
+if __name__ == '__main__':
     d = Director()
     #d.clear()
     #d.sleep(seconds=0.1)
