@@ -47,6 +47,8 @@ class FunctionTracker:
         duration = (end_time - start_time).total_seconds()
         print(f"Time taken for this execution: {duration:.2f} seconds")
         self.compare_with_average(self.func.__name__, duration)
+        time.sleep(3)
+        os.system('clear')
 
     def log_event(self, function_name, action_type, execution_time=None):
         with sqlite3.connect(self.DB_PATH) as conn:
@@ -70,7 +72,6 @@ class FunctionTracker:
                 deviation = ((current_duration - average_duration) / average_duration) * 100
                 color = "\033[91m" if deviation > 0 else "\033[92m"
                 print(f"{color}This time it took {abs(deviation):.2f}% {'more' if deviation > 0 else 'less'} than the average.\033[0m")
-                print("\n\n\n\n\n\n\n\n\n")
 
 def track_function(func):
     return FunctionTracker(func)
