@@ -25,8 +25,10 @@ class FunctionTracker:
             conn.commit()
 
     def __call__(self, *args, **kwargs):
-        print(f"Executing function: {self.func.__name__}")
-        decision = input("Execute? Press Enter to execute or type 'skip' to skip: ")
+        os.system('clear')
+        print(f"Executing function: {self.func.__name__}\n\n")
+        time.sleep(1)
+        decision = input("Execute? Press Enter to execute or type 'skip' to skip:\n")
         if decision.lower() == 'skip':
             print("Skipping task.")
             return
@@ -47,8 +49,7 @@ class FunctionTracker:
         duration = (end_time - start_time).total_seconds()
         print(f"Time taken for this execution: {duration:.2f} seconds")
         self.compare_with_average(self.func.__name__, duration)
-        time.sleep(3)
-        os.system('clear')
+        time.sleep(2)
 
     def log_event(self, function_name, action_type, execution_time=None):
         with sqlite3.connect(self.DB_PATH) as conn:
