@@ -25,3 +25,8 @@ class UIHelper:
 
     def open_webpage(self, url):
         self.execute_command(['xdg-open', url])
+
+    def input(self, prompt=''):
+        print(f'\033[33m{prompt}\033[0m')
+        print('\033[33mPress Enter to continue...\033[0m')
+        return input()
