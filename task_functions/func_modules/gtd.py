@@ -137,8 +137,3 @@ class GettingThingsDone:
         self.d.print("\nTasks to discard as trash:")
         for discarded in self.trash:
             self.d.print(f"- {discarded}")
-        self.d.sleep(seconds=5)
-
-# Usage
-gtd = GettingThingsDone("assets/data/refs.db")
-gtd.run()

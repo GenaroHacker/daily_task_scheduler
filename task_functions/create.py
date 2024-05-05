@@ -1,5 +1,6 @@
 from src.director import Director
 from src.decorator import track_function
+from task_functions.func_modules.gtd import GettingThingsDone
 
 d = Director()
 #d.clear()
@@ -27,3 +28,8 @@ def organize_digital_files():
     d.input()
     d.print("Open your email inbox and mark the spam messages by blocking the sender.\n\n")
     d.input()
+
+@track_function
+def get_things_done(db_path="assets/data/refs.db"):
+    gtd = GettingThingsDone(db_path)
+    gtd.run()
