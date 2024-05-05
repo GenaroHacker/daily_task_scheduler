@@ -46,21 +46,38 @@ if __name__ == '__main__':
         time.sleep(0.5)
         d.print("The total time expected to complete is two and a half hours.\n\n")
         time.sleep(0.5)
-        d.print("Grab your study materials and and a highlighter.\n\nThen, press enter to start the first focus block.\n\n")
+        d.print("Grab your study materials and a highlighter.\n\nThen, press enter to start the first focus block.\n\n")
         input()
-        for i in ["first", "second", "third", "fourth", "last"]:
-            d.print(f"The {i} focus block starts now.\n\n")
-            d.play_sound(sound="beeps.wav")
-            d.sleep(minutes=25)
-            d.play_sound(sound="alarm.wav")
-            d.print(f"The {i} focus block is over.\n\n")
-            time.sleep(0.5)
-            if i != "last":
-                d.print("Take a short break for five minutes.\n\n")
-                d.sleep(minutes=5)
+
+        # Define the schedule of focus blocks and breaks
+        sessions = [
+            ("focus", "first", 25),
+            ("break", "short", 5),
+            ("focus", "second", 25),
+            ("break", "short", 5),
+            ("focus", "third", 25),
+            ("break", "short", 5),
+            ("focus", "fourth", 25),
+            ("break", "long", 10),
+            ("focus", "last", 25)
+        ]
+
+        def handle_session(session_type, description, duration):
+            if session_type == "focus":
+                d.print(f"The {description} focus block starts now.\n\n")
             else:
-                d.print("Take a long break for ten minutes.\n\n")
-                d.sleep(minutes=10)
+                d.print(f"Take a {description} break for {duration} minutes.\n\n")
+            
+            d.play_sound(sound="beeps.wav" if session_type == "focus" else "chimes.wav")
+            d.sleep(minutes=duration)
+            d.play_sound(sound="alarm.wav")
+            d.print(f"The {description} {'focus block' if session_type == 'focus' else 'break'} is over.\n\n")
+            time.sleep(0.5)
+
+        # Execute each session according to the defined schedule
+        for session_type, description, duration in sessions:
+            handle_session(session_type, description, duration)
+
         d.print("Congratulations! You have completed a full Pomodoro session.\n\n")
         d.print("Press enter to continue with the next task in your schedule.\n\n")
         input()
