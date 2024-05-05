@@ -11,7 +11,7 @@ d = Director()
 #d.start_new_project('Sample Project', 'Initial Setup')
 #d.make_progress('Sample Project')
 #d.print("This is an example with a very long sentence...")
-
+#d.input(prompt='')
 
 
 @track_function
@@ -20,8 +20,8 @@ def pomodoro_session():
     time.sleep(0.5)
     d.print("The total time expected to complete is two and a half hours.\n\n")
     time.sleep(0.5)
-    d.print("Grab your study materials and a highlighter.\n\nThen, press enter to start the first focus block.\n\n")
-    input()
+    d.print("Grab your study materials and a highlighter.\n\n")
+    d.input()
 
     # Define the schedule of focus blocks and breaks
     sessions = [
@@ -53,5 +53,4 @@ def pomodoro_session():
         handle_session(session_type, description, duration)
 
     d.print("Congratulations! You have completed a full Pomodoro session.\n\n")
-    d.print("Press enter to continue with the next task in your schedule.\n\n")
-    input()
+    d.input()
