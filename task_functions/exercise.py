@@ -11,3 +11,5 @@ d = Director()
 #d.start_new_project('Sample Project', 'Initial Setup')
 #d.make_progress('Sample Project')
 #d.print("This is an example with a very long sentence...")
+#d.input(prompt='')
+
