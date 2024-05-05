@@ -12,7 +12,7 @@ d = Director()
 #d.start_new_project('Sample Project', 'Initial Setup')
 #d.make_progress('Sample Project')
 #d.print("This is an example with a very long sentence...")
-#d.input(prompt='')
+#d.input()
 
 @track_function
 def coffee():
@@ -23,3 +23,4 @@ def coffee():
         d.print(f"It's {time.strftime('%H:%M:%S')}.\n\nYou are still in time for a cup of coffee if you want.\n\nContinue with the next task in your schedule once you're coffee is ready.\n\n")
     else:
         d.print(f"It's {time.strftime('%H:%M:%S')}.\n\nYou should avoid drinking coffee now.\n\nIt's too late for that.\n\nContinue with the next task in your schedule instead.\n\n")
+    d.input()
