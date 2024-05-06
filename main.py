@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
     # Define weekly schedule using function keys
     weekly_schedule = {
-        0: ['gtd', 'rank'],     # Monday
+        0: ['gtd', 'rank'],         # Monday
         1: ['coffee', 'files'],     # Tuesday
         2: ['coffee', 'files'],     # Wednesday
         3: ['coffee', 'desk'],      # Thursday
