@@ -11,9 +11,3 @@ class Director(ProjectDatabaseManager, ScriptCommandExecutor, UIHelper, DynamicT
         UIHelper.__init__(self)
         DynamicTextPrinter.__init__(self)
 
-    def play_sound(self, sound="alarm.wav"):
-        sound_path = os.path.join(self.SOUNDS_DIR, sound)
-        self.execute_command(['aplay', sound_path])
-
-    def open_webpage(self, url):
-        self.execute_command(['xdg-open', url])
