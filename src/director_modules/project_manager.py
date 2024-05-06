@@ -102,6 +102,14 @@ class ProjectDatabaseManager:
             else:
                 print("Invalid answer. Please try again.")  # Inform the user and repeat the loop
 
-
+    def project_exists(self, project_name):
+        # Connect to the SQLite database
+        with sqlite3.connect(self.DB_PATH) as conn:
+            cursor = conn.cursor()
+            # Query the database to check if a project with the specified name exists
+            cursor.execute("SELECT 1 FROM table_projects WHERE name=?", (project_name,))
+            exists = cursor.fetchone()
+            # Return True if the project exists, False otherwise
+            return exists is not None
 
 
