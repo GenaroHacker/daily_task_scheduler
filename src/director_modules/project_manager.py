@@ -43,10 +43,37 @@ class ProjectDatabaseManager:
     def delete_project(self, project_id):
         with sqlite3.connect(self.DB_PATH) as conn:
             cursor = conn.cursor()
-            cursor.execute("DELETE FROM table_projects WHERE id=?", (project_id,))
-            cursor.execute("UPDATE table_projects SET rank = rank - 1 WHERE rank > (SELECT rank FROM table_projects WHERE id=?)", (project_id,))
-            conn.commit()
-            print(f"Project with ID {project_id} and all related steps have been deleted.")
+            # Start a transaction
+            conn.execute("BEGIN TRANSACTION;")
+            try:
+                # Step 1: Explicitly delete all steps in table_project_steps with the project_id
+                cursor.execute("DELETE FROM table_project_steps WHERE project_id=?", (project_id,))
+
+                # Step 2: Get the rank of the project to be deleted
+                rank_to_delete = cursor.execute("SELECT rank FROM table_projects WHERE id=?", (project_id,)).fetchone()
+                if rank_to_delete:
+                    rank_to_delete = rank_to_delete[0]
+
+                # Update the ranks of projects with higher ranks
+                cursor.execute("UPDATE table_projects SET rank = rank - 1 WHERE rank > ?", (rank_to_delete,))
+
+                # Step 3: Delete the project record
+                cursor.execute("DELETE FROM table_projects WHERE id=?", (project_id,))
+
+                # Step 4: Update the IDs of the projects with higher IDs
+                higher_projects = cursor.execute("SELECT id FROM table_projects WHERE id > ?", (project_id,)).fetchall()
+                for (higher_id,) in higher_projects:
+                    new_id = higher_id - 1
+                    cursor.execute("UPDATE table_project_steps SET project_id=? WHERE project_id=?", (new_id, higher_id))
+                    cursor.execute("UPDATE table_projects SET id=? WHERE id=?", (new_id, higher_id))
+
+                # Commit changes
+                conn.commit()
+                print(f"Project with ID {project_id} and all related steps have been deleted.")
+            except sqlite3.Error as e:
+                # Roll back any changes if an error occurs
+                conn.rollback()
+                print(f"An error occurred: {e}")
 
     def make_progress(self, project="intelligent_random"):
         with sqlite3.connect(self.DB_PATH) as conn:
