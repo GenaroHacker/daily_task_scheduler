@@ -55,6 +55,9 @@ class ProjectDatabaseManager:
             if not project_id:
                 return
 
+            project_name = cursor.execute("SELECT name FROM table_projects WHERE id=?", (project_id,)).fetchone()[0]
+            print(f"Project: {project_name}")
+
             step = self._get_latest_step(cursor, project_id)
             if not step:
                 print("No steps found for this project.")

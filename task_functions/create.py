@@ -33,3 +33,7 @@ def organize_digital_files():
 def get_things_done(db_path="assets/data/refs.db"):
     gtd = GettingThingsDone(db_path)
     gtd.run()
+
+@track_function
+def make_progress():
+    d.make_progress()

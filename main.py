@@ -5,6 +5,7 @@ from task_functions.create import organize_digital_files
 from task_functions.recreate import coffee
 from task_functions.practice import pomodoro_session
 from task_functions.create import get_things_done
+from task_functions.create import make_progress
 
 if __name__ == '__main__':
     # Map functions to function keys
@@ -13,12 +14,13 @@ if __name__ == '__main__':
         'desk': organize_desk,
         'files': organize_digital_files,
         'pomodoro': pomodoro_session,
-        'gtd': get_things_done
+        'gtd': get_things_done,
+        'progress': make_progress
     }
 
     # Define weekly schedule using function keys
     weekly_schedule = {
-        0: ['coffee', 'desk'],      # Monday
+        0: ['gtd', 'progress'],     # Monday
         1: ['coffee', 'files'],     # Tuesday
         2: ['coffee', 'files'],     # Wednesday
         3: ['coffee', 'desk'],      # Thursday
