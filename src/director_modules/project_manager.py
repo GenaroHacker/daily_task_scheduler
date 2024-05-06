@@ -112,3 +112,32 @@ class ProjectDatabaseManager:
             cursor.execute("SELECT 1 FROM table_projects WHERE name=?", (project_name,))
             exists = cursor.fetchone()
             return exists is not None
+
+    def rank_projects(self):
+        def ask_user_cmp(item1, item2):
+            while True:
+                print(f" [ 1 ] [{item1}] ?" )
+                print(f" [ 2 ] [{item2}] ?") 
+                cmp = input(" --> ? ")
+                if cmp == "1":
+                    return -1  # Higher priority for item1
+                if cmp == "2":
+                    return 1   # Higher priority for item2
+                print("1 or 2, please!")
+    
+        with sqlite3.connect(self.DB_PATH) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT id, name FROM table_projects ORDER BY rank")
+            projects = cursor.fetchall()
+            project_names = [p[1] for p in projects]
+    
+            # Use sorted with a comparison function via functools.cmp_to_key
+            from functools import cmp_to_key
+            sorted_projects = sorted(project_names, key=cmp_to_key(ask_user_cmp))
+    
+            # Update the database with new rankings
+            for rank, project_name in enumerate(sorted_projects, start=1):
+                cursor.execute("UPDATE table_projects SET rank = ? WHERE name = ?", (rank, project_name))
+    
+            conn.commit()
+            print("Projects have been successfully re-ranked based on user input.")
