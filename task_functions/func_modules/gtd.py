@@ -49,9 +49,12 @@ class GettingThingsDone:
         self.d.clear()
         if self.actionables:
             for item in self.actionables:
-                next_step = input(f"What is the next step for the project '{item}'? ")
-                self.d.start_new_project(item, next_step)
-                self.long_tasks.append(item)
+                if self.d.project_exists(item):
+                    print(f"Project '{item}' already exists. Skipping...")
+                else:
+                    next_step = input(f"What is the next step for the project '{item}'? ")
+                    self.d.start_new_project(item, next_step)
+                    self.long_tasks.append(item)
 
     def process_quick_tasks(self):
         self.d.clear()
