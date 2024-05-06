@@ -30,3 +30,10 @@ class UIHelper:
         print(f'\033[33m{prompt}\033[0m')
         print('\033[33mPress Enter to continue...\033[0m')
         return input()
+
+    def play_sound(self, sound="alarm.wav"):
+        sound_path = os.path.join(self.SOUNDS_DIR, sound)
+        self.execute_command(['aplay', sound_path])
+
+    def open_webpage(self, url):
+        self.execute_command(['xdg-open', url])
