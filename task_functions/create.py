@@ -37,3 +37,7 @@ def get_things_done(db_path="assets/data/refs.db"):
 @track_function
 def make_progress():
     d.make_progress()
+
+@track_function
+def rank_projects():
+    d.rank_projects()
