@@ -33,7 +33,7 @@ class FunctionTracker:
 
     def prepare_execution(self):
         os.system('clear')
-        print(f"Preparing to execute function: {self.func.__name__}")
+        print(f"Preparing to execute function: \033[33m{self.func.__name__}\033[0m")
 
     def decide_execution(self):
         decision = input("Execute? Press Enter to execute or type 'skip' to skip:\n")
