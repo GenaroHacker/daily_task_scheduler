@@ -1,6 +1,7 @@
 import sqlite3
 import os
 import random
+from datetime import datetime
 
 class ProjectDatabaseManager:
     DB_PATH = os.path.join('assets', 'data', 'projects.db')
@@ -11,6 +12,7 @@ class ProjectDatabaseManager:
     def _create_db_if_not_exists(self):
         with sqlite3.connect(self.DB_PATH) as conn:
             cursor = conn.cursor()
+            # Create projects and project steps tables
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS table_projects (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -22,20 +24,37 @@ class ProjectDatabaseManager:
                 CREATE TABLE IF NOT EXISTS table_project_steps (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     project_id INTEGER,
-                    sequence INTEGER,
+                    timestamp DATETIME,
                     name TEXT,
                     FOREIGN KEY(project_id) REFERENCES table_projects(id) ON DELETE CASCADE
+                );
+            ''')
+            # Create archived projects and project steps tables
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS table_projects_archives (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT UNIQUE
+                );
+            ''')
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS table_project_steps_archived (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    project_id INTEGER,
+                    timestamp DATETIME,
+                    name TEXT,
+                    FOREIGN KEY(project_id) REFERENCES table_projects_archives(id) ON DELETE CASCADE
                 );
             ''')
             conn.commit()
 
     def start_new_project(self, project_name, first_step):
+        timestamp = datetime.now()
         with sqlite3.connect(self.DB_PATH) as conn:
             cursor = conn.cursor()
             cursor.execute("UPDATE table_projects SET rank = rank + 1")
             cursor.execute("INSERT INTO table_projects (name, rank) VALUES (?, 1)", (project_name,))
             project_id = cursor.lastrowid
-            cursor.execute("INSERT INTO table_project_steps (project_id, sequence, name) VALUES (?, 1, ?)", (project_id, first_step))
+            cursor.execute("INSERT INTO table_project_steps (project_id, timestamp, name) VALUES (?, ?, ?)", (project_id, timestamp, first_step))
             conn.commit()
             print("New project started with initial step.")
             return True
@@ -43,9 +62,17 @@ class ProjectDatabaseManager:
     def delete_project(self, project_id):
         with sqlite3.connect(self.DB_PATH) as conn:
             cursor = conn.cursor()
-            # Start a transaction
             conn.execute("BEGIN TRANSACTION;")
             try:
+                # Archive the project
+                project_details = cursor.execute("SELECT name FROM table_projects WHERE id=?", (project_id,)).fetchone()
+                if project_details:
+                    cursor.execute("INSERT INTO table_projects_archives (name) VALUES (?)", (project_details[0],))
+                    archive_id = cursor.lastrowid
+                    steps = cursor.execute("SELECT timestamp, name FROM table_project_steps WHERE project_id=?", (project_id,)).fetchall()
+                    for step in steps:
+                        cursor.execute("INSERT INTO table_project_steps_archived (project_id, timestamp, name) VALUES (?, ?, ?)", (archive_id, step[0], step[1]))
+
                 # Step 1: Explicitly delete all steps in table_project_steps with the project_id
                 cursor.execute("DELETE FROM table_project_steps WHERE project_id=?", (project_id,))
 
@@ -53,9 +80,7 @@ class ProjectDatabaseManager:
                 rank_to_delete = cursor.execute("SELECT rank FROM table_projects WHERE id=?", (project_id,)).fetchone()
                 if rank_to_delete:
                     rank_to_delete = rank_to_delete[0]
-
-                # Update the ranks of projects with higher ranks
-                cursor.execute("UPDATE table_projects SET rank = rank - 1 WHERE rank > ?", (rank_to_delete,))
+                    cursor.execute("UPDATE table_projects SET rank = rank - 1 WHERE rank > ?", (rank_to_delete,))
 
                 # Step 3: Delete the project record
                 cursor.execute("DELETE FROM table_projects WHERE id=?", (project_id,))
@@ -69,31 +94,11 @@ class ProjectDatabaseManager:
 
                 # Commit changes
                 conn.commit()
-                print(f"Project with ID {project_id} and all related steps have been deleted.")
+                print(f"Project with ID {project_id} and all related steps have been archived and deleted.")
             except sqlite3.Error as e:
                 # Roll back any changes if an error occurs
                 conn.rollback()
                 print(f"An error occurred: {e}")
-
-    def make_progress(self, project="intelligent_random"):
-        with sqlite3.connect(self.DB_PATH) as conn:
-            cursor = conn.cursor()
-            project_id = self._get_project_id(cursor, project)
-            if not project_id:
-                return
-
-            project_name = cursor.execute("SELECT name FROM table_projects WHERE id=?", (project_id,)).fetchone()[0]
-            print(f"Project: {project_name}")
-
-            step = self._get_latest_step(cursor, project_id)
-            if not step:
-                print("No steps found for this project.")
-                return
-
-            step_id, sequence, step_name = step
-            print(f"Step {sequence}: {step_name}")
-
-            self._handle_project_progress(cursor, project_id, sequence)
 
     def _get_project_id(self, cursor, project):
         if project == "intelligent_random":
@@ -116,19 +121,42 @@ class ProjectDatabaseManager:
             return result[0]
 
     def _get_latest_step(self, cursor, project_id):
-        cursor.execute("SELECT id, sequence, name FROM table_project_steps WHERE project_id=? ORDER BY sequence DESC LIMIT 1", (project_id,))
+        cursor.execute("SELECT id, timestamp, name FROM table_project_steps WHERE project_id=? ORDER BY timestamp DESC LIMIT 1", (project_id,))
         return cursor.fetchone()
 
-    def _handle_project_progress(self, cursor, project_id, sequence):
+    def make_progress(self, project="intelligent_random"):
+        with sqlite3.connect(self.DB_PATH) as conn:
+            cursor = conn.cursor()
+            project_id = self._get_project_id(cursor, project)
+            if not project_id:
+                print("No project found.")
+                return
+
+            project_name = cursor.execute("SELECT name FROM table_projects WHERE id=?", (project_id,)).fetchone()[0]
+            print(f"Project: {project_name}")
+
+            step = self._get_latest_step(cursor, project_id)
+            if not step:
+                print("No steps found for this project.")
+                return
+
+            step_id, timestamp, step_name = step
+            print(f"Latest step on {timestamp}: {step_name}")
+
+            self._handle_project_progress(cursor, project_id)
+
+    def _handle_project_progress(self, cursor, project_id):
         while True:
             response = input("Enter 'continue' to proceed or 'end project' to finish: ").lower()
             if response == 'continue':
                 next_step = input("Enter the next step: ")
-                sequence += 1
-                cursor.execute("INSERT INTO table_project_steps (project_id, sequence, name) VALUES (?, ?, ?)", (project_id, sequence, next_step))
+                timestamp = datetime.now()
+                cursor.execute("INSERT INTO table_project_steps (project_id, timestamp, name) VALUES (?, ?, ?)", (project_id, timestamp, next_step))
+                print(f"Step added: {next_step} at {timestamp}")
                 break
             elif response == 'end project':
                 self.delete_project(project_id)
+                print("Project has been ended and deleted.")
                 break
             else:
                 print("Invalid answer. Please try again.")
@@ -151,20 +179,20 @@ class ProjectDatabaseManager:
                 if cmp == "2":
                     return 1   # Higher priority for item2
                 print("1 or 2, please!")
-    
+
         with sqlite3.connect(self.DB_PATH) as conn:
             cursor = conn.cursor()
             cursor.execute("SELECT id, name FROM table_projects ORDER BY rank")
             projects = cursor.fetchall()
             project_names = [p[1] for p in projects]
-    
+
             # Use sorted with a comparison function via functools.cmp_to_key
             from functools import cmp_to_key
             sorted_projects = sorted(project_names, key=cmp_to_key(ask_user_cmp))
-    
+
             # Update the database with new rankings
             for rank, project_name in enumerate(sorted_projects, start=1):
                 cursor.execute("UPDATE table_projects SET rank = ? WHERE name = ?", (rank, project_name))
-    
+
             conn.commit()
             print("Projects have been successfully re-ranked based on user input.")
