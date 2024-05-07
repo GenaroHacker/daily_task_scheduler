@@ -7,6 +7,7 @@ from task_functions.practice import pomodoro_session
 from task_functions.create import get_things_done
 from task_functions.create import make_progress
 from task_functions.create import rank_projects
+from task_functions.recreate import breathing_exercise
 
 if __name__ == '__main__':
     # Map functions to function keys
@@ -17,13 +18,14 @@ if __name__ == '__main__':
         'pomodoro': pomodoro_session,
         'gtd': get_things_done,
         'progress': make_progress,
-        'rank': rank_projects
+        'rank': rank_projects,
+        'breath': breathing_exercise
     }
 
     # Define weekly schedule using function keys
     weekly_schedule = {
         0: ['gtd', 'rank'],         # Monday
-        1: ['coffee', 'files'],     # Tuesday
+        1: ['coffee', 'breath'],    # Tuesday
         2: ['coffee', 'files'],     # Wednesday
         3: ['coffee', 'desk'],      # Thursday
         4: ['coffee', 'desk'],      # Friday
