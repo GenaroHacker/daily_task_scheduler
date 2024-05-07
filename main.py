@@ -1,4 +1,4 @@
-from src.scheduler import DailyTaskScheduler
+from src.facade import Facade
 
 from task_functions.create import organize_desk
 from task_functions.create import organize_digital_files
@@ -31,5 +31,5 @@ if __name__ == '__main__':
         6: ['coffee', 'gtd']        # Sunday
     }
 
-    scheduler = DailyTaskScheduler(weekly_schedule, functions)
+    scheduler = Facade(weekly_schedule, functions)
     scheduler.execute_instructions()
