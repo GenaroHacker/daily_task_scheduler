@@ -68,7 +68,8 @@ class Facade:
         Executes the scheduled tasks for the current day.
         Ensures tasks are not repeated if they have been executed earlier the same day.
         """
-        today = datetime.now().weekday()
+        day_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        today = day_names[datetime.now().weekday()]
         if today in self.schedule:
             functions_today = self.schedule[today]
             last_executed_index = self._get_last_state()
@@ -76,7 +77,7 @@ class Facade:
             if last_executed_index is not None and last_executed_index >= len(functions_today) - 1:
                 print("All tasks for today have been completed.")
                 return
-            
+
             start_index = last_executed_index + 1 if last_executed_index is not None else 0
 
             for index, function_key in enumerate(functions_today[start_index:], start=start_index):

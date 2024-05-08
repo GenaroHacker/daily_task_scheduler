@@ -1,16 +1,16 @@
 from src.facade import Facade
 
 
-from smark.task_functions.practice import pomodoro_session
+from task_functions.practice import pomodoro_session
 
-from smark.task_functions.recreate import coffee
-from smark.task_functions.recreate import breathing_exercise
+from task_functions.recreate import coffee
+from task_functions.recreate import breathing_exercise
 
-from smark.task_functions.create import organize_desk
-from smark.task_functions.create import organize_digital_files
-from smark.task_functions.create import get_things_done
-from smark.task_functions.create import make_progress
-from smark.task_functions.create import rank_projects
+from task_functions.create import organize_desk
+from task_functions.create import organize_digital_files
+from task_functions.create import get_things_done
+from task_functions.create import make_progress
+from task_functions.create import rank_projects
 
 
 if __name__ == '__main__':
@@ -28,13 +28,13 @@ if __name__ == '__main__':
 
     # Define weekly schedule using function keys
     weekly_schedule = {
-        0: ['gtd', 'rank'],         # Monday
-        1: ['coffee', 'breath'],    # Tuesday
-        2: ['coffee', 'files', 'gtd'],     # Wednesday
-        3: ['coffee', 'desk'],      # Thursday
-        4: ['coffee', 'desk'],      # Friday
-        5: ['coffee', 'pomodoro'],  # Saturday
-        6: ['coffee', 'gtd']        # Sunday
+        "Monday": ['gtd', 'rank'],
+        "Tuesday": ['coffee', 'breath'],
+        "Wednesday": ['coffee', 'files', 'gtd'],
+        "Thursday": ['coffee', 'desk'],
+        "Friday": ['coffee', 'desk'],
+        "Saturday": ['coffee', 'pomodoro'],
+        "Sunday": ['coffee', 'gtd']
     }
 
     scheduler = Facade(weekly_schedule, functions)
