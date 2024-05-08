@@ -1,7 +1,9 @@
 import json
 import os
 from datetime import datetime
+from src.director import Director
 from src.facade_modules.theme import SeasonThemeManager
+from src.facade_modules.annual_events import AnnualEventManager
 
 class Facade:
     """
@@ -69,6 +71,7 @@ class Facade:
         Executes the scheduled tasks for the current day.
         Ensures tasks are not repeated if they have been executed earlier the same day.
         """
+        d = Director()
         day_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
         today = day_names[datetime.now().weekday()]
         if today in self.schedule:
@@ -82,6 +85,8 @@ class Facade:
             start_index = last_executed_index + 1 if last_executed_index is not None else 0
 
             SeasonThemeManager().manage_theme()
+            AnnualEventManager().print_upcoming_events()
+            d.input()
 
             for index, function_key in enumerate(functions_today[start_index:], start=start_index):
                 self.functions[function_key]()  # Execute the function using key
