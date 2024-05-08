@@ -30,7 +30,7 @@ def organize_digital_files():
     d.input()
 
 @track_function
-def get_things_done(db_path="assets/data/refs.db"):
+def get_things_done(db_path="assets/data/smark.db"):
     gtd = GettingThingsDone(db_path)
     gtd.run()
 

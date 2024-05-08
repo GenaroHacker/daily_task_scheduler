@@ -4,7 +4,7 @@ import traceback
 from datetime import datetime
 
 class FunctionTracker:
-    DB_PATH = os.path.join('assets', 'data', 'history.db')
+    DB_PATH = os.path.join('assets', 'data', 'smark.db')
 
     def __init__(self, func):
         self.func = func

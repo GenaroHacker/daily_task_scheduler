@@ -4,7 +4,7 @@ import random
 from datetime import datetime
 
 class ProjectDatabaseManager:
-    DB_PATH = os.path.join('assets', 'data', 'projects.db')
+    DB_PATH = os.path.join('assets', 'data', 'smark.db')
 
     def __init__(self):
         self._create_db_if_not_exists()
@@ -31,7 +31,7 @@ class ProjectDatabaseManager:
             ''')
             # Create archived projects and project steps tables
             cursor.execute('''
-                CREATE TABLE IF NOT EXISTS table_projects_archives (
+                CREATE TABLE IF NOT EXISTS table_projects_archived (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name TEXT UNIQUE
                 );
@@ -42,7 +42,7 @@ class ProjectDatabaseManager:
                     project_id INTEGER,
                     timestamp DATETIME,
                     name TEXT,
-                    FOREIGN KEY(project_id) REFERENCES table_projects_archives(id) ON DELETE CASCADE
+                    FOREIGN KEY(project_id) REFERENCES table_projects_archived(id) ON DELETE CASCADE
                 );
             ''')
             conn.commit()
@@ -67,7 +67,7 @@ class ProjectDatabaseManager:
                 # Archive the project
                 project_details = cursor.execute("SELECT name FROM table_projects WHERE id=?", (project_id,)).fetchone()
                 if project_details:
-                    cursor.execute("INSERT INTO table_projects_archives (name) VALUES (?)", (project_details[0],))
+                    cursor.execute("INSERT INTO table_projects_archived (name) VALUES (?)", (project_details[0],))
                     archive_id = cursor.lastrowid
                     steps = cursor.execute("SELECT timestamp, name FROM table_project_steps WHERE project_id=?", (project_id,)).fetchall()
                     for step in steps:

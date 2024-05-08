@@ -26,7 +26,7 @@ if __name__ == '__main__':
     weekly_schedule = {
         0: ['gtd', 'rank'],         # Monday
         1: ['coffee', 'breath'],    # Tuesday
-        2: ['coffee', 'files'],     # Wednesday
+        2: ['coffee', 'files', 'gtd'],     # Wednesday
         3: ['coffee', 'desk'],      # Thursday
         4: ['coffee', 'desk'],      # Friday
         5: ['coffee', 'pomodoro'],  # Saturday
