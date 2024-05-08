@@ -1,13 +1,17 @@
 from src.facade import Facade
 
-from task_functions.create import organize_desk
-from task_functions.create import organize_digital_files
-from task_functions.recreate import coffee
-from task_functions.practice import pomodoro_session
-from task_functions.create import get_things_done
-from task_functions.create import make_progress
-from task_functions.create import rank_projects
-from task_functions.recreate import breathing_exercise
+
+from smark.task_functions.practice import pomodoro_session
+
+from smark.task_functions.recreate import coffee
+from smark.task_functions.recreate import breathing_exercise
+
+from smark.task_functions.create import organize_desk
+from smark.task_functions.create import organize_digital_files
+from smark.task_functions.create import get_things_done
+from smark.task_functions.create import make_progress
+from smark.task_functions.create import rank_projects
+
 
 if __name__ == '__main__':
     # Map functions to function keys
