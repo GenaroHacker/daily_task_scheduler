@@ -1,6 +1,7 @@
 import json
 import os
 from datetime import datetime
+from src.facade_modules.theme import SeasonThemeManager
 
 class Facade:
     """
@@ -79,6 +80,8 @@ class Facade:
                 return
 
             start_index = last_executed_index + 1 if last_executed_index is not None else 0
+
+            SeasonThemeManager().manage_theme()
 
             for index, function_key in enumerate(functions_today[start_index:], start=start_index):
                 self.functions[function_key]()  # Execute the function using key
