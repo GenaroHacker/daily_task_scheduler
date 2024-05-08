@@ -1,6 +1,8 @@
 import os
 import sqlite3
 from datetime import datetime
+from time import sleep
+from src.director import Director
 
 class SeasonThemeManager:
     DB_PATH = os.path.join('assets', 'data', 'smark.db')
@@ -48,7 +50,8 @@ class SeasonThemeManager:
         if current_theme is None:
             self._update_theme()
         else:
-            print(f"Season: {self._get_current_season()}\nTheme: {current_theme}")
+            Director().print(f"Season: {self._get_current_season()}\nTheme: {current_theme}")
+            sleep(1)
     
     def _is_hemisphere_set(self):
         with sqlite3.connect(self.DB_PATH) as conn:
