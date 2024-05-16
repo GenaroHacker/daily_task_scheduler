@@ -1,12 +1,12 @@
-def plot_time_worked(days: int) -> None:
-    import sqlite3
-    import pandas as pd
-    from datetime import datetime, timedelta
-    import matplotlib.pyplot as plt
-    import numpy as np
+import sqlite3
+import pandas as pd
+from datetime import datetime, timedelta
+import matplotlib.pyplot as plt
+import numpy as np
 
+def plot_time_worked(db_path: str, days: int) -> None:
     # Connect to the SQLite database
-    conn = sqlite3.connect('/home/gnr/Desktop/smark-main/assets/data/smark.db')
+    conn = sqlite3.connect(db_path)
 
     # Read the events table into a DataFrame
     events_df = pd.read_sql_query("SELECT * FROM events", conn)
@@ -33,7 +33,7 @@ def plot_time_worked(days: int) -> None:
             func_df = day_df[day_df['function_name'] == func]
             start_times = func_df[func_df['action_type'] == 'start']['timestamp'].values
             end_times = func_df[func_df['action_type'] == 'end']['timestamp'].values
-            
+
             for start, end in zip(start_times, end_times):
                 total_worked_seconds += (end - start) / np.timedelta64(1, 's')
 
@@ -48,6 +48,3 @@ def plot_time_worked(days: int) -> None:
     plt.title('Percentage of Time Worked per Day')
     plt.ylim(0, 100)  # Set y-axis limits to show full 100%
     plt.show()
-
-
-plot_time_worked(30)
