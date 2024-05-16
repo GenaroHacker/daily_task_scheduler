@@ -6,6 +6,7 @@ from src.director_modules.plotter import Plotter
 
 class Director(ProjectDatabaseManager, ScriptCommandExecutor, UIHelper, DynamicTextPrinter, Plotter):
     def __init__(self, events=None, days_range=30):
+        self.db_path = "assets/data/smark.db"
         ProjectDatabaseManager.__init__(self)
         ScriptCommandExecutor.__init__(self)
         UIHelper.__init__(self)
