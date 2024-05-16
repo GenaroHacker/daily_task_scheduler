@@ -50,7 +50,7 @@ def plot_time_worked(db_path: str, days_range: int = None) -> None:
         days_data[day_start.date()] = worked_percentage
 
     # Plot the results
-    plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(12, 6))
     plt.bar(days_data.keys(), days_data.values(), color='blue')
     plt.xlabel('Date')
     plt.ylabel('Percentage of Time Worked')
