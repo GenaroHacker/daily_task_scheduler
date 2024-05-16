@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plot_time_worked(db_path: str, days: int) -> None:
+def plot_time_worked(db_path: str, days_range: int = None) -> None:
     # Connect to the SQLite database
     conn = sqlite3.connect(db_path)
 
@@ -20,10 +20,19 @@ def plot_time_worked(db_path: str, days: int) -> None:
     # Filter records with action_type as 'start' and 'end'
     filtered_df = events_df[events_df['action_type'].isin(['start', 'end'])]
 
+    # Calculate the date range
+    end_date = datetime.now()
+    if days_range is None:
+        start_date = filtered_df['timestamp'].min()
+        days = (end_date - start_date).days
+    else:
+        start_date = end_date - timedelta(days=days_range)
+        days = days_range
+
     # Calculate total time worked per day
     days_data = {}
     for day in range(days):
-        day_start = (datetime.now() - timedelta(days=day)).replace(hour=0, minute=0, second=0, microsecond=0)
+        day_start = (end_date - timedelta(days=day)).replace(hour=0, minute=0, second=0, microsecond=0)
         day_end = day_start + timedelta(days=1)
         day_df = filtered_df[(filtered_df['timestamp'] >= day_start) & (filtered_df['timestamp'] < day_end)]
 
