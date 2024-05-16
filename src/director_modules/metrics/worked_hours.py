@@ -71,7 +71,3 @@ def plot_start_and_end_hours(db_path, days_range=None):
     
     # Close the database connection
     conn.close()
-
-# Example usage
-plot_start_and_end_hours(db_path_latest, days_range=14)
-plot_start_and_end_hours(db_path_latest)  # When days_range is None, it will span from the first record to today
