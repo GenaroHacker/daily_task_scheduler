@@ -64,5 +64,5 @@ def breathing_exercise():
 
 @track_function
 def plot_work_time_percentage():
-    d.plot_time_worked(30)
-    d.plot_start_and_end_hours(days_range=30)
+    d.plot_time_worked()
+    d.plot_start_and_end_hours()
