@@ -5,6 +5,7 @@ from task_functions.practice import pomodoro_session
 
 from task_functions.recreate import coffee
 from task_functions.recreate import breathing_exercise
+from task_functions.recreate import plot_work_time_percentage
 
 from task_functions.create import organize_desk
 from task_functions.create import organize_digital_files
@@ -23,15 +24,16 @@ if __name__ == '__main__':
         'gtd': get_things_done,
         'progress': make_progress,
         'rank': rank_projects,
-        'breath': breathing_exercise
+        'breath': breathing_exercise,
+        'plot': plot_work_time_percentage
     }
 
     # Define weekly schedule using function keys
     weekly_schedule = {
         "Monday": ['gtd', 'rank'],
         "Tuesday": ['coffee', 'breath'],
-        "Wednesday": ['coffee', 'files', 'gtd'],
-        "Thursday": ['coffee', 'desk'],
+        "Wednesday": ['plot', 'coffee', 'files', 'gtd'],
+        "Thursday": ['plot', 'coffee', 'desk'],
         "Friday": ['coffee', 'desk'],
         "Saturday": ['coffee', 'pomodoro'],
         "Sunday": ['coffee', 'gtd']
