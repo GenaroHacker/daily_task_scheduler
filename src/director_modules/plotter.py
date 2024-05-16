@@ -6,7 +6,3 @@ class Plotter:
 
     def plot_time_worked(self, days: int) -> None:
         plot_time_worked(self.db_path, days)
-
-if __name__ == "__main__":
-    p = Plotter("assets/data/smark.db")
-    p.plot_time_worked(30)
