@@ -61,3 +61,7 @@ def breathing_exercise():
     d.print("Enjoy the rest of your day!\n")
     sleep(0.3)
     d.input()
+
+@track_function
+def plot_work_time_percentage():
+    d.plot_time_worked(30)
