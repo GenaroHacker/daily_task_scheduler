@@ -1,6 +1,7 @@
 import sqlite3
-import matplotlib.pyplot as plt
 import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 from datetime import datetime, timedelta
 
 def plot_start_and_end_hours(db_path, days_range=None):
@@ -57,12 +58,24 @@ def plot_start_and_end_hours(db_path, days_range=None):
             ax.plot([daily_end_hours['day'].iloc[i], daily_end_hours['day'].iloc[i + 1]], 
                     [daily_end_hours['hour'].iloc[i], daily_end_hours['hour'].iloc[i + 1]], 'r-')
     
+    # Highlight Mondays
+    for date in full_days_range:
+        if date.weekday() == 0:  # Monday
+            ax.axvline(date, color='grey', linestyle='--', linewidth=0.5)
+    
     # Formatting the plot
     ax.set_title(f'Start and End Hours from {start_date.date()} to {end_date.date()}')
     ax.set_xlabel('Day')
     ax.set_ylabel('Hour')
-    ax.set_xticks(full_days_range)
-    ax.set_xticklabels([date.strftime('%Y-%m-%d') for date in full_days_range], rotation=45, ha='right')
+    
+    # Use matplotlib.dates to set major and minor locators and formatters
+    ax.xaxis.set_major_locator(mdates.DayLocator(interval=1))
+    ax.xaxis.set_minor_locator(mdates.HourLocator(interval=1))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    
+    # Rotate and align the x labels
+    fig.autofmt_xdate()
+    
     ax.set_yticks(range(0, 25, 1))
     ax.grid(True)
     ax.legend()
