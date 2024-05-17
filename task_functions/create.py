@@ -17,7 +17,7 @@ d = Director()
 @track_function
 def organize_desk():
     d.print("Organize your desk.\n\nMake sure everything is in its place.\n\n")
-
+    d.input()
 
 @track_function
 def organize_digital_files():
