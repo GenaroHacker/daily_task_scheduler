@@ -34,8 +34,8 @@ if __name__ == '__main__':
         "Tuesday": ['coffee', 'breath'],
         "Wednesday": ['plot', 'coffee', 'files', 'gtd'],
         "Thursday": ['plot', 'coffee', 'desk'],
-        "Friday": ['coffee', 'desk'],
-        "Saturday": ['coffee', 'pomodoro'],
+        "Friday": ['plot', 'desk'],
+        "Saturday": ['plot', 'pomodoro'],
         "Sunday": ['coffee', 'gtd']
     }
 
