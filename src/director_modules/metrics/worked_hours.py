@@ -58,10 +58,13 @@ def plot_start_and_end_hours(db_path, days_range=None):
             ax.plot([daily_end_hours['day'].iloc[i], daily_end_hours['day'].iloc[i + 1]], 
                     [daily_end_hours['hour'].iloc[i], daily_end_hours['hour'].iloc[i + 1]], 'r-')
     
+    # Get all unique dates from the DataFrame
+    unique_dates = pd.concat([daily_start_hours['day'], daily_end_hours['day']]).unique()
+
     # Highlight Mondays
-    for date in full_days_range:
+    for date in unique_dates:
         if date.weekday() == 0:  # Monday
-            ax.axvline(date, color='grey', linestyle='--', linewidth=0.5)
+            ax.axvline(date, color='grey', linestyle='--', linewidth=2.5, zorder=-1)
     
     # Formatting the plot
     ax.set_title(f'Start and End Hours from {start_date.date()} to {end_date.date()}')
