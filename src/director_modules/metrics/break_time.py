@@ -32,18 +32,23 @@ def plot_work_vs_break_time_distribution(db_path):
     for date, group in filtered_df.groupby(filtered_df['timestamp'].dt.date):
         starts = group[group['action_type'] == 'start']['timestamp']
         ends = group[group['action_type'] == 'end']['timestamp']
-        
+
+        # Ensure the data is in chronological order
+        starts = starts.sort_values()
+        ends = ends.sort_values()
+
         if not starts.empty and not ends.empty:
-            first_start = starts.min()
-            last_end = ends.max()
-            work_time = (last_end - first_start).total_seconds()
-            
+            first_start = starts.iloc[0]
+            last_end = ends.iloc[-1]
+            total_work_period = (last_end - first_start).total_seconds()
+
+            # Calculate break time
             break_time = 0
-            for end, start in zip(ends[:-1], starts[1:]):
+            for start, end in zip(starts[1:], ends[:-1]):
                 break_time += (start - end).total_seconds()
-            
-            actual_work_time = work_time - break_time
-            
+
+            actual_work_time = total_work_period - break_time
+
             daily_times.append({
                 'date': date,
                 'work_time': actual_work_time,
@@ -74,7 +79,7 @@ def plot_work_vs_break_time_distribution(db_path):
     monthly_break_time = monthly_df['break_time'].sum()
 
     # Plotting
-    fig, axs = plt.subplots(1, 3, figsize=(12, 6))
+    fig, axs = plt.subplots(1, 3, figsize=(18, 6))
 
     def plot_pie(ax, work_time, break_time, title):
         data = [work_time, break_time]
