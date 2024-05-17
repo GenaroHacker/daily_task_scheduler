@@ -66,3 +66,4 @@ def breathing_exercise():
 def plot_work_time_percentage():
     d.plot_time_worked()
     d.plot_start_and_end_hours()
+    d.plot_task_time_distribution()
