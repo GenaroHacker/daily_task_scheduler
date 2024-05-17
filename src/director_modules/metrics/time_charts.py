@@ -67,10 +67,9 @@ def plot_task_time_distribution(db_path):
         ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
         ax.set_title(title)
 
-    plot_pie(axs[0], daily_total_time, 'Daily Time Distribution')
+    plot_pie(axs[0], monthly_total_time, 'Monthly Time Distribution')
     plot_pie(axs[1], weekly_total_time, 'Weekly Time Distribution')
-    plot_pie(axs[2], monthly_total_time, 'Monthly Time Distribution')
+    plot_pie(axs[2], daily_total_time, 'Daily Time Distribution')
 
     plt.tight_layout()
     plt.show()
-
