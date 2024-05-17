@@ -51,9 +51,20 @@ def plot_time_worked(db_path: str, days_range: int = None) -> None:
 
     # Plot the results
     plt.figure(figsize=(12, 6))
-    plt.bar(days_data.keys(), days_data.values(), color='blue')
+
+    # Add vertical lines for each Monday in the background
+    ax = plt.gca()
+    for date in days_data.keys():
+        if date.weekday() == 0:  # Monday
+            ax.axvline(x=date, color='grey', linestyle='--', zorder=0)
+
+    plt.bar(days_data.keys(), days_data.values(), color='blue', zorder=3)
+
     plt.xlabel('Date')
     plt.ylabel('Percentage of Time Worked')
     plt.title('Percentage of Time Worked per Day')
     plt.ylim(0, 100)  # Set y-axis limits to show full 100%
+    plt.xticks(rotation=45)
+    plt.tight_layout()
     plt.show()
+
