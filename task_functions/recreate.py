@@ -68,3 +68,4 @@ def plot_work_time_percentage():
     d.plot_start_and_end_hours()
     d.plot_task_time_distribution()
     d.plot_work_vs_break_time_distribution()
+    d.plot_daily_skipped_vs_completed_tasks()
