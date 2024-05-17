@@ -64,7 +64,7 @@ def plot_start_and_end_hours(db_path, days_range=None):
     # Highlight Mondays
     for date in unique_dates:
         if date.weekday() == 0:  # Monday
-            ax.axvline(date, color='grey', linestyle='--', linewidth=2.5, zorder=-1)
+            ax.axvline(date, color='grey', linestyle='--', linewidth=2.0, zorder=-1)
     
     # Formatting the plot
     ax.set_title(f'Start and End Hours from {start_date.date()} to {end_date.date()}')
