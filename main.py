@@ -3,9 +3,13 @@ from src.facade import Facade
 
 from task_functions.practice import pomodoro_session
 
+from task_functions.exercise import go_to_gym
+from task_functions.exercise import do_40_pushups
+
 from task_functions.recreate import coffee
 from task_functions.recreate import breathing_exercise
 from task_functions.recreate import plot_work_time_percentage
+from task_functions.recreate import eat
 
 from task_functions.create import organize_desk
 from task_functions.create import organize_digital_files
@@ -25,7 +29,10 @@ if __name__ == '__main__':
         'progress': make_progress,
         'rank': rank_projects,
         'breath': breathing_exercise,
-        'plot': plot_work_time_percentage
+        'plot': plot_work_time_percentage,
+        'eat': eat,
+        'gym': go_to_gym,
+        'pushups': do_40_pushups
     }
 
     # Define weekly schedule using function keys
@@ -36,7 +43,7 @@ if __name__ == '__main__':
         "Thursday": ['plot', 'coffee', 'desk'],
         "Friday": ['plot', 'desk'],
         "Saturday": ['plot', 'pomodoro'],
-        "Sunday": ['coffee', 'gtd']
+        "Sunday": ['eat', 'gym', 'pushups']
     }
 
     scheduler = Facade(weekly_schedule, functions)

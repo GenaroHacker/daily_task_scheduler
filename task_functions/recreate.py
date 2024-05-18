@@ -69,3 +69,11 @@ def plot_work_time_percentage():
     d.plot_task_time_distribution()
     d.plot_work_vs_break_time_distribution()
     d.plot_daily_skipped_vs_completed_tasks()
+
+@track_function
+def eat():
+    d.print("Time to eat!\n\n")
+    sleep(0.5)
+    d.print("Prepare a healthy meal and enjoy it.\n\n")
+    d.input()
+
