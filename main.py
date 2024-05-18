@@ -9,7 +9,7 @@ from task_functions.exercise import do_40_pushups
 
 from task_functions.recreate import coffee
 from task_functions.recreate import breathing_exercise
-from task_functions.recreate import plot_work_time_percentage
+from task_functions.recreate import plot_metrics
 from task_functions.recreate import eat
 
 from task_functions.create import organize_desk
@@ -30,7 +30,7 @@ if __name__ == '__main__':
         'progress': make_progress,
         'rank': rank_projects,
         'breath': breathing_exercise,
-        'plot': plot_work_time_percentage,
+        'plot': plot_metrics,
         'eat': eat,
         'gym': go_to_gym,
         'pushups': do_40_pushups,
