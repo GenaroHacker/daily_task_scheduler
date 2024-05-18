@@ -5,9 +5,6 @@
 __pycache__/
 *.py[cod]
 
-# Ignore database files
-*.db
-
 # Ignore JSON state and data files
 *.json
 
