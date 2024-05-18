@@ -2,6 +2,7 @@ from src.facade import Facade
 
 
 from task_functions.practice import pomodoro_session
+from task_functions.practice import guitar_loop_note
 
 from task_functions.exercise import go_to_gym
 from task_functions.exercise import do_40_pushups
@@ -32,8 +33,10 @@ if __name__ == '__main__':
         'plot': plot_work_time_percentage,
         'eat': eat,
         'gym': go_to_gym,
-        'pushups': do_40_pushups
+        'pushups': do_40_pushups,
+        'loop': guitar_loop_note
     }
+
 
     # Define weekly schedule using function keys
     weekly_schedule = {
