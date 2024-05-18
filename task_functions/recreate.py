@@ -63,7 +63,7 @@ def breathing_exercise():
     d.input()
 
 @track_function
-def plot_work_time_percentage():
+def plot_metrics():
     d.plot_time_worked()
     d.plot_start_and_end_hours()
     d.plot_task_time_distribution()
