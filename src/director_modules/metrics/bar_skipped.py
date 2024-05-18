@@ -47,7 +47,7 @@ def plot_daily_skipped_vs_completed_tasks(db_path, days_range=None):
     fig, ax = plt.subplots(figsize=(12, 6))
 
     # Plot the bar chart
-    daily_counts.plot(kind='bar', ax=ax, color=['red', 'grey'])
+    daily_counts.plot(kind='bar', ax=ax, color=['blue', 'grey'])
 
     # Set chart title and labels
     ax.set_title('Daily Skipped vs Completed Tasks')
