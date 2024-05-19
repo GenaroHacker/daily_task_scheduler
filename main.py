@@ -3,6 +3,7 @@ from src.facade import Facade
 
 from task_functions.practice import pomodoro_session
 from task_functions.practice import guitar_loop_note
+from task_functions.practice import solve_leetcode_problem
 
 from task_functions.exercise import go_to_gym
 from task_functions.exercise import do_40_pushups
@@ -34,7 +35,8 @@ if __name__ == '__main__':
         'eat': eat,
         'gym': go_to_gym,
         'pushups': do_40_pushups,
-        'loop': guitar_loop_note
+        'loop': guitar_loop_note,
+        'leetcode': solve_leetcode_problem
     }
 
 
@@ -46,7 +48,7 @@ if __name__ == '__main__':
         "Thursday": ['plot', 'coffee', 'desk'],
         "Friday": ['plot', 'desk'],
         "Saturday": ['plot', 'pomodoro'],
-        "Sunday": ['eat', 'gym', 'pushups']
+        "Sunday": ['leetcode', 'loop']
     }
 
     scheduler = Facade(weekly_schedule, functions)
