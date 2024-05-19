@@ -24,7 +24,10 @@ def go_to_gym():
 
 @track_function
 def do_40_pushups():
-    d.print("Do 20 pushups.")
-    d.input()
-    d.print("Do 20 more pushups.")
-    d.input()
+    for i in range(4):
+        d.print(f"Do 10 pushups. Set {i + 1}")
+        d.input()
+        if i < 3:
+            d.print("Rest.")
+            d.sleep(seconds=100)
+    d.print("You have completed 40 pushups.")
