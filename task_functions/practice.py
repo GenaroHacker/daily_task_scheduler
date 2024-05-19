@@ -88,6 +88,8 @@ def guitar_loop_note():
     time.sleep(0.5)
     d.print("When you are ready, start the metronome and begin the exercise.\n\n")
     time.sleep(0.5)
+    d.print("The pick goes up for strings 2, 4, and 6, and down for strings 1, 3, and 5.\n\n")
+    time.sleep(0.5)
     d.print("You must complete 3 loops in a row.\n\n")
     d.input()
 
