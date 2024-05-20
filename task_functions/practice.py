@@ -197,6 +197,18 @@ def take_exam():
 
 @track_function
 def implement_design_pattern():
+    def open_diagram(image_path):
+        import matplotlib.pyplot as plt
+        import matplotlib.image as mpimg
+
+        # Open an image file
+        image = mpimg.imread(image_path)
+
+        # Display the image
+        plt.imshow(image)
+        plt.axis('off')
+        plt.show()
+
     import random
     patterns = {
         "Creational": [
@@ -445,6 +457,8 @@ def implement_design_pattern():
     d.print("A filled circle represents 'more than one.' When the circle appears at the end of a reference, it means that there are many objects referenced or added.\n\n")
     time.sleep(0.5)
     d.print("Finally, a rectangle with a bent corner includes pseudocode annotations allows to outline the implementations of the operations.\n\n")
+    time.sleep(2)
+    open_diagram("assets/images/class.png")
     d.input()
     d.clear()
 
@@ -455,6 +469,8 @@ def implement_design_pattern():
     d.print("The symbol of an object is a rectangle with rounded edges and a line that separates the name of the object from references to other objects.\n\n")
     time.sleep(0.5)
     d.print("The arrows indicate the referenced object.\n\n")
+    time.sleep(2)
+    open_diagram("assets/images/object.png")
     d.input()
     d.clear()
 
@@ -477,6 +493,8 @@ def implement_design_pattern():
     d.print("A request to create an object is indicated by a dotted arrow.\n\n")
     time.sleep(0.5)
     d.print("A request to the same sender object is represented with an arrow towards itself.\n\n")
+    time.sleep(2)
+    open_diagram("assets/images/interaction.png")
     d.input()
     d.clear()
 
