@@ -41,3 +41,24 @@ def make_progress():
 @track_function
 def rank_projects():
     d.rank_projects()
+
+@track_function
+def transcribe_highlighted_text():
+    d.print("Pick a book already read and highlighted.\n\n")
+    d.input()
+    d.clear()
+    d.print("Write down the title of the book in the new Google Docs document.\n\n")
+    d.open_webpage("https://docs.google.com/document/u/0/create?usp=docs_home&ths=true")
+    d.input()
+    d.clear()
+    d.print("Transcribe all the highlighted text.\n\n")
+    d.input()
+    d.clear()
+    d.print("Read the text and correct it.\n\n")
+    d.input()
+    d.clear()
+    d.print("Save the document as a PDF.\n\n")
+    d.input()
+    d.clear()
+    d.print("Store the PDF to your summaries folder within your organization system.\n\n")
+    d.input()

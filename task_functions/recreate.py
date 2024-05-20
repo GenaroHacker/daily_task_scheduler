@@ -77,3 +77,46 @@ def eat():
     d.print("Prepare a healthy meal and enjoy it.\n\n")
     d.input()
 
+@track_function
+def get_a_shower():
+    d.print("Get a shower.\n\n")
+    d.input()
+
+@track_function
+def shave_face():
+    d.print("Shave face.\n\n")
+    d.input()
+
+def brush_teeth():
+    d.print("Brush teeth.\n\n")
+    d.input()
+
+
+@track_function
+def take_vitamins():
+    d.print("Take vitamins.\n\n")
+    d.input()
+
+@track_function
+def drink_water():
+    d.print("Drink one or two glasses of water.\n\n")
+    d.input()
+
+@track_function
+def practice_meditation():
+    d.print("Sit down in a comfortable position, close your eyes, and press enter to start the meditation session.\n\n")
+    time.sleep(1)
+    d.print("Make sure your computer sound is not muted, since you will hear an alarm when the session is over.\n\n")
+    d.input()
+    time.sleep(5)
+    d.play_sound(sound='tibetan_gong.wav')
+    d.clear()
+    d.sleep(minutes=0.3)
+    d.play_sound(sound='tibetan_gong.wav')
+    time.sleep(3)
+    d.clear()
+    d.print("You have completed the meditation session.\n\n")
+    time.sleep(1)
+    d.print("Enjoy the rest of your day!\n\n")
+    time.sleep(0.3)
+    d.input()
