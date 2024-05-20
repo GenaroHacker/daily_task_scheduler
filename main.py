@@ -63,7 +63,8 @@ if __name__ == '__main__':
         'brush': brush_teeth,
         'vitamins': take_vitamins,
         'water': drink_water,
-        'meditation': practice_meditation
+        'meditation': practice_meditation,
+        'transcribe': transcribe_highlighted_text
     }
 
 
