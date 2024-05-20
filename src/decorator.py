@@ -9,6 +9,7 @@ class FunctionTracker:
     def __init__(self, func):
         self.func = func
         self.start_time = None
+        self.error_log_file = os.path.join('error.log')
         self.initialize_database()
 
     def initialize_database(self):
@@ -43,8 +44,9 @@ class FunctionTracker:
         self.start_time = datetime.now()
         try:
             result = self.func(*args, **kwargs)
-        except Exception:
-            traceback.print_exc()
+        except Exception as e:
+            with open(self.error_log_file, 'w') as f:
+                f.write(traceback.format_exc())
             return
         self.complete_task()
         return result
