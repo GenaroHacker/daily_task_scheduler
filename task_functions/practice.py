@@ -345,6 +345,14 @@ def implement_design_pattern():
         ]
     }
 
+    d.print("You are going to implement a design pattern.\n\n")
+    time.sleep(0.5)
+    d.print("Design patterns are reusable solutions to common problems in software design.\n\n")
+    time.sleep(0.5)
+    d.print("Start by grabbing pen and paper.")
+    d.input()
+    d.clear()
+
     creational_patterns = random.sample(patterns["Creational"], 3)
     structural_patterns = random.sample(patterns["Structural"], 3)
     behavioral_patterns = random.sample(patterns["Behavioral"], 3)
@@ -362,7 +370,6 @@ def implement_design_pattern():
             f"  - {behavioral_patterns[0]['name']}\n"
             f"  - {behavioral_patterns[1]['name']}\n"
             f"  - {behavioral_patterns[2]['name']}\n")
-    d.input()
 
     selected_pattern = input("Enter the name of the selected pattern: ")
 
@@ -370,73 +377,111 @@ def implement_design_pattern():
     selected_info = next((pattern for pattern in all_patterns if pattern['name'] == selected_pattern), None)
 
     if selected_info:
-        d.print(f"Selected Pattern: {selected_info['name']}\n\n"
-                f"Definition: {selected_info['definition']}\n\n"
-                f"Aspects that Vary: {selected_info['aspects']}\n\n"
-                f"Participants: {selected_info['participants']}\n\n")
+        d.clear()
+        d.print("Write down the name of the selected pattern along with the following information on the paper:\n\n\n")
+        time.sleep(1)
+        d.print("Selected pattern:\n")
+        time.sleep(0.5)
+        d.print(f"{selected_info['name']}\n\n")
+        time.sleep(1)
+        d.print("Definition:\n")
+        time.sleep(0.5)
+        d.print(f"{selected_info['definition']}\n\n")
+        time.sleep(1)
+        d.print("Aspect that can vary:\n")
+        time.sleep(0.5)
+        d.print(f"{selected_info['aspects']}\n\n")
+        time.sleep(1)
+        d.print("Participants:\n")
+        time.sleep(0.5)
+        d.print(f"{selected_info['participants']}\n\n")
+        time.sleep(1)
     else:
         d.print("Selected pattern not found. Please make sure you enter the correct name.\n\n")
     d.input()
     d.clear()
 
     d.print("Grab the design pattern book and review the chapter of the selected pattern.\n\n")
+    time.sleep(0.5)
+    d.print("If you don't have the book, you can search for the pattern on the internet.\n\n")
+    time.sleep(0.5)
     d.input()
     d.clear()
 
-    d.print("Draw the UML diagrams of the general structure of the pattern on a piece of paper.\n"
-            "You don't need to draw the specific diagrams of the examples.\n\n")
+    d.print("Draw the UML diagrams of the general structure of the pattern on a piece of paper.\n\n")
+    time.sleep(0.5)
+    d.print("You don't need to draw the specific diagrams of the examples.\n\n")
     d.input()
     d.clear()
 
-    d.print("Find a problem that can be solved with the selected pattern.\n"
-            "You can use the example from the book, find a problem on the internet,\n"
-            "or imagine your own problem.\n\n")
+    d.print("Find a problem that can be solved with the selected pattern.\n\n")
+    time.sleep(0.5)
+    d.print("You can use the example from the book, find a problem on the internet, or imagine your own problem.\n\n")
+    time.sleep(0.5)
+    d.print("Write down the problem statement on the paper.\n\n")
     d.input()
     d.clear()
 
-    d.print("Draw the diagram of classes. It represents the classes, their structure,\n"
-            "and the static relationships between them.\n\n"
-            "A class is denoted by a rectangle with the class name in bold at the top.\n"
-            "The main methods of the class appear under the class name. The properties are shown below the methods.\n"
-            "If the font of a method appears in italics, it means that it is an abstract operation.\n\n"
-            "Class inheritance is represented by a triangle that connects a subclass to its parent class.\n\n"
-            "A reference to an object that represents an aggregation or part-whole relationship\n"
-            "is indicated by an arrow with a rhombus at its base.\n\n"
-            "An arrow without a rhombus denotes association.\n\n"
-            "To show which classes create instances of others we use an arrow with a dotted line.\n"
-            "We call this the 'Create' relationship. The arrow points to the class that is being instantiated.\n\n"
-            "A filled circle represents 'more than one.' When the circle appears at the end of a reference,\n"
-            "it means that there are many objects referenced or added.\n\n"
-            "Finally, a rectangle with a bent corner includes pseudocode annotations\n"
-            "that allow us to outline the implementations of the operations.\n\n")
+    d.print("Draw the diagram of classes. It represents the classes, their structure, and the static relationships between them.\n\n")
+    time.sleep(0.5)
+    d.print("A class is denoted by a rectangle with the class name in bold at the top.\n\n")
+    time.sleep(0.5)
+    d.print("The main methods of the class appear under the class name. The properties are shown below the methods.\n\n")
+    time.sleep(0.5)
+    d.print("If the font of a method appears in italics, it means that it is an abstract operation.\n\n")
+    time.sleep(0.5)
+    d.print("Class inheritance is represented by a triangle that connects a subclass to its parent class.\n\n")
+    time.sleep(0.5)
+    d.print("A reference to an object that represents an aggregation or part-whole relationship.\n\n")
+    time.sleep(0.5)
+    d.print("It is indicated by an arrow with a rhombus at its base.\n\n")
+    time.sleep(0.5)
+    d.print("An arrow without a rhombus denotes association.\n\n")
+    time.sleep(0.5)
+    d.print("To show which classes create instances of others we use an arrow with a dotted line.\n\n")
+    time.sleep(0.5)
+    d.print("We call this the 'Create' relationship. The arrow points to the class that is being instantiated.\n\n")
+    time.sleep(0.5)
+    d.print("A filled circle represents 'more than one.' When the circle appears at the end of a reference, it means that there are many objects referenced or added.\n\n")
+    time.sleep(0.5)
+    d.print("Finally, a rectangle with a bent corner includes pseudocode annotations allows to outline the implementations of the operations.\n\n")
     d.input()
     d.clear()
 
-    d.print("Draw the diagram of objects. It shows a given object's structure in execution time.\n\n"
-            "An object diagram shows exclusively instances. Objects are named 'aSomething,'\n"
-            "where 'Something' is the class of the object.\n\n"
-            "The symbol of an object is a rectangle with rounded edges and a line\n"
-            "that separates the name of the object from references to other objects.\n\n"
-            "The arrows indicate the referenced object.\n\n")
+    d.print("Draw the diagram of objects. It shows a given object's structure in execution time.\n\n")
+    time.sleep(0.5)
+    d.print("An object diagram shows exclusively instances. Objects are named 'aSomething, where 'Something' is the class of the object.\n\n")
+    time.sleep(0.5)
+    d.print("The symbol of an object is a rectangle with rounded edges and a line that separates the name of the object from references to other objects.\n\n")
+    time.sleep(0.5)
+    d.print("The arrows indicate the referenced object.\n\n")
     d.input()
     d.clear()
 
-    d.print("Draw the diagram of interactions. It shows the flow of messages between objects.\n\n"
-            "An interaction diagram shows the order in which requests between objects are executed.\n"
-            "In an interaction diagram, time flows from top to bottom.\n\n"
-            "A vertical line indicates the lifespan of a certain object.\n\n"
-            "The object naming convention is the same as that for object diagrams - ('aCar', 'anApple').\n\n"
-            "If no instance of the object is created until some time after the initial instant represented in the diagram,\n"
-            "then its vertical line appears dotted until the moment of creation.\n\n"
-            "A vertical rectangle indicates that an object is active: that is, it is processing a request.\n"
-            "The operation can send requests to other objects: this is indicated by a horizontal arrow\n"
-            "pointing to the receiving object. The name of the request is displayed above the arrow.\n\n"
-            "A request to create an object is indicated by a dotted arrow.\n\n"
-            "A request to the same sender object is represented with an arrow towards itself.\n\n")
+    d.print("Draw the diagram of interactions. It shows the flow of messages between objects.\n\n")
+    time.sleep(0.5)
+    d.print("An interaction diagram shows the order in which requests between objects are executed.\n\n")
+    time.sleep(0.5)
+    d.print("In an interaction diagram, time flows from top to bottom.\n\n")
+    time.sleep(0.5)
+    d.print("A vertical line indicates the lifespan of a certain object.\n\n")
+    time.sleep(0.5)
+    d.print("The object naming convention is the same as that for object diagrams - ('aCar', 'anApple').\n\n")
+    time.sleep(0.5)
+    d.print("If no instance of the object is created until some time after the initial instant represented in the diagram, then its vertical line appears dotted until the moment of creation.\n\n")
+    time.sleep(0.5)
+    d.print("A vertical rectangle indicates that an object is active: that is, it is processing a request.\n\n")
+    time.sleep(0.5)
+    d.print("The operation can send requests to other objects: this is indicated by a horizontal arrow pointing to the receiving object. The name of the request is displayed above the arrow.\n\n")
+    time.sleep(0.5)
+    d.print("A request to create an object is indicated by a dotted arrow.\n\n")
+    time.sleep(0.5)
+    d.print("A request to the same sender object is represented with an arrow towards itself.\n\n")
     d.input()
     d.clear()
 
-    d.print("Implement the design pattern in a Google Colab notebook. (Do not use AI tools)\n\n")
+    d.print("Implement the design pattern.\n\n")
+    d.open_webpage("https://colab.research.google.com/#create=true")
     d.input()
     d.clear()
 
