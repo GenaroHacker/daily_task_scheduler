@@ -89,7 +89,7 @@ def plot_work_vs_break_time_distribution(db_path):
     today_data = [today_work_time, today_break_time]
 
     # Create pie charts
-    fig, axs = plt.subplots(1, 3, figsize=(18, 6))
+    fig, axs = plt.subplots(1, 3, figsize=(12, 6))
 
     # Plot Last 30 Days Average Time Distribution
     plot_pie_chart(axs[0], last_30_days_data, 'Last 30 Days Average Time Distribution')
