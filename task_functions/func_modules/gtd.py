@@ -35,7 +35,8 @@ class GettingThingsDone:
             item = input("Enter an item: ")
             if item.lower() == 'end':
                 break
-            self.items.append(item)
+            if item and item not in self.items:
+                self.items.append(item)
 
     def categorize_items(self):
         self.d.clear()
@@ -49,6 +50,8 @@ class GettingThingsDone:
         self.d.clear()
         if self.actionables:
             for item in self.actionables:
+                if item in self.quick_tasks:
+                    continue
                 if self.d.project_exists(item):
                     print(f"Project '{item}' already exists. Skipping...")
                 else:
@@ -87,14 +90,14 @@ class GettingThingsDone:
         if not self.quick_tasks:
             self.d.print("No quick tasks to perform.")
             return
-        self.d.print("\nQuick tasks to do now (less than 2 minutes):")
+        self.d.print("Quick tasks to do now (less than 2 minutes):")
         for quick_task in self.quick_tasks:
             self.d.print(f"- {quick_task}")
             self.d.input()
 
     def review_references(self):
         self.d.clear()
-        self.d.print("\nReview your saved references:")
+        self.d.print("Review your saved references:")
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         cursor.execute("SELECT id, reference FROM refs ORDER BY id ASC")
@@ -137,6 +140,6 @@ class GettingThingsDone:
         self.execute_quick_tasks()
         self.review_references()
         self.d.clear()
-        self.d.print("\nTasks to discard as trash:")
+        self.d.print("Tasks to discard as trash:")
         for discarded in self.trash:
             self.d.print(f"- {discarded}")
