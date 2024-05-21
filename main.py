@@ -81,3 +81,4 @@ if __name__ == '__main__':
 
     scheduler = Facade(weekly_schedule, functions)
     scheduler.execute_instructions()
+
