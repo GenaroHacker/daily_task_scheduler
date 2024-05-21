@@ -65,6 +65,7 @@ def breathing_exercise():
 @track_function
 def plot_metrics():
     d.plot_time_worked()
+    d.plot_event_schedule()
     d.plot_start_and_end_hours()
     d.plot_task_time_distribution()
     d.plot_work_vs_break_time_distribution()
