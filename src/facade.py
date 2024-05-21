@@ -31,6 +31,13 @@ class Facade:
         self.state_file = os.path.join("assets", "data", "state.json")
         os.makedirs(os.path.dirname(self.state_file), exist_ok=True)
 
+        # Check if all items in the schedule values are included in the functions keys
+        for day, tasks in self.schedule.items():
+            for task in tasks:
+                if task not in self.functions:
+                    raise ValueError(f"Task '{task}' in schedule for '{day}' is not defined in functions dictionary.")
+
+
     def _update_state(self, index):
         """
         Updates the execution state by writing the last executed index and date to a JSON file.
