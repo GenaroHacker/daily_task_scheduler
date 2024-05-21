@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import sqlite3
 from datetime import datetime, timedelta
 
+
 def plot_daily_skipped_vs_completed_tasks(db_path, days_range=None):
     # Connect to the SQLite database
     conn = sqlite3.connect(db_path)
@@ -23,20 +24,28 @@ def plot_daily_skipped_vs_completed_tasks(db_path, days_range=None):
     records_df = pd.DataFrame(records, columns=column_names)
 
     # Convert the timestamp to datetime
-    records_df['timestamp'] = pd.to_datetime(records_df['timestamp'])
+    records_df["timestamp"] = pd.to_datetime(records_df["timestamp"])
 
     # Filter for 'start' and 'end' action types
-    filtered_df = records_df[records_df['action_type'].isin(['start', 'end', 'skipped'])]
+    filtered_df = records_df[
+        records_df["action_type"].isin(["start", "end", "skipped"])
+    ]
 
     # Extract date from timestamp
-    filtered_df['date'] = filtered_df['timestamp'].dt.date
+    filtered_df["date"] = filtered_df["timestamp"].dt.date
 
     # Calculate daily counts of completed and skipped tasks
-    daily_completed = filtered_df[filtered_df['action_type'] == 'end'].groupby('date').size()
-    daily_skipped = filtered_df[filtered_df['action_type'] == 'skipped'].groupby('date').size()
+    daily_completed = (
+        filtered_df[filtered_df["action_type"] == "end"].groupby("date").size()
+    )
+    daily_skipped = (
+        filtered_df[filtered_df["action_type"] == "skipped"].groupby("date").size()
+    )
 
     # Create a DataFrame with both counts
-    daily_counts = pd.DataFrame({'Completed': daily_completed, 'Skipped': daily_skipped}).fillna(0)
+    daily_counts = pd.DataFrame(
+        {"Completed": daily_completed, "Skipped": daily_skipped}
+    ).fillna(0)
 
     # If days_range is specified, filter the data
     if days_range is not None:
@@ -47,16 +56,15 @@ def plot_daily_skipped_vs_completed_tasks(db_path, days_range=None):
     fig, ax = plt.subplots(figsize=(12, 6))
 
     # Plot the bar chart
-    daily_counts.plot(kind='bar', ax=ax, color=['blue', 'grey'])
+    daily_counts.plot(kind="bar", ax=ax, color=["blue", "grey"])
 
     # Set chart title and labels
-    ax.set_title('Daily Skipped vs Completed Tasks')
-    ax.set_xlabel('Date')
-    ax.set_ylabel('Number of Tasks')
+    ax.set_title("Daily Skipped vs Completed Tasks")
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Number of Tasks")
 
     # Display legend
-    ax.legend(['Completed', 'Skipped'])
+    ax.legend(["Completed", "Skipped"])
 
     plt.tight_layout()
     plt.show()
-
