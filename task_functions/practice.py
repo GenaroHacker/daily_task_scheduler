@@ -193,8 +193,6 @@ def take_exam():
     d.open_webpage("https://colab.research.google.com/github/GenaroHacker/skill_builder_exams/blob/main/main.ipynb")
     d.input()
 
-
-
 @track_function
 def implement_design_pattern():
     def open_diagram(image_path):
@@ -383,33 +381,35 @@ def implement_design_pattern():
             f"  - {behavioral_patterns[1]['name']}\n"
             f"  - {behavioral_patterns[2]['name']}\n")
 
-    selected_pattern = input("Enter the name of the selected pattern: ")
+    selected_pattern = input("Enter the name of the selected pattern: ").capitalize()
 
     all_patterns = creational_patterns + structural_patterns + behavioral_patterns
     selected_info = next((pattern for pattern in all_patterns if pattern['name'] == selected_pattern), None)
 
-    if selected_info:
-        d.clear()
-        d.print("Write down the name of the selected pattern along with the following information on the paper:\n\n\n")
-        time.sleep(1)
-        d.print("Selected pattern:\n")
-        time.sleep(0.5)
-        d.print(f"{selected_info['name']}\n\n")
-        time.sleep(1)
-        d.print("Definition:\n")
-        time.sleep(0.5)
-        d.print(f"{selected_info['definition']}\n\n")
-        time.sleep(1)
-        d.print("Aspect that can vary:\n")
-        time.sleep(0.5)
-        d.print(f"{selected_info['aspects']}\n\n")
-        time.sleep(1)
-        d.print("Participants:\n")
-        time.sleep(0.5)
-        d.print(f"{selected_info['participants']}\n\n")
-        time.sleep(1)
-    else:
-        d.print("Selected pattern not found. Please make sure you enter the correct name.\n\n")
+    while selected_info is None:
+        selected_pattern = input("Invalid pattern name. Enter the name of the selected pattern: ").capitalize()
+        selected_info = next((pattern for pattern in all_patterns if pattern['name'] == selected_pattern), None)
+
+    d.clear()
+    d.print("Write down the name of the selected pattern along with the following information on the paper:\n\n\n")
+    time.sleep(1)
+    d.print("Selected pattern:\n")
+    time.sleep(0.5)
+    d.print(f"{selected_info['name']}\n\n")
+    time.sleep(1)
+    d.print("Definition:\n")
+    time.sleep(0.5)
+    d.print(f"{selected_info['definition']}\n\n")
+    time.sleep(1)
+    d.print("Aspect that can vary:\n")
+    time.sleep(0.5)
+    d.print(f"{selected_info['aspects']}\n\n")
+    time.sleep(1)
+    d.print("Participants:\n")
+    time.sleep(0.5)
+    d.print(f"{selected_info['participants']}\n\n")
+    time.sleep(1)
+    
     d.input()
     d.clear()
 
@@ -422,7 +422,7 @@ def implement_design_pattern():
 
     d.print("Draw the UML diagrams of the general structure of the pattern on a piece of paper.\n\n")
     time.sleep(0.5)
-    d.print("You don't need to draw the specific diagrams of the examples.\n\n")
+    d.print("You don't need to draw the diagrams of the specific examples.\n\n")
     d.input()
     d.clear()
 
@@ -430,12 +430,26 @@ def implement_design_pattern():
     time.sleep(0.5)
     d.print("You can use the example from the book, find a problem on the internet, or imagine your own problem.\n\n")
     time.sleep(0.5)
-    d.print("Write down the problem statement on the paper.\n\n")
+    while True: # problem must be at least 3 characters long
+        problem = input("Enter the problem statement: ")
+        if len(problem) >= 3:
+            break
+    d.clear()
+    d.print("Write down the problem statement on your paper:\n\n\n")
+    time.sleep(0.5)
+    d.print(f"- {problem}\n\n")
     d.input()
     d.clear()
 
+    # diagram of classes
     d.print("Draw the diagram of classes. It represents the classes, their structure, and the static relationships between them.\n\n")
     time.sleep(0.5)
+    d.print("Think about the classes that will be part of your solution.\n\n")
+    time.sleep(0.7)
+    d.print(f"Consider both the general participants of the {selected_info['name']} pattern ({selected_info['participants']}) and how they will be implemented in your specific problem ({problem}).\n\n\n\n")
+    time.sleep(1.5)
+    d.print("The diagram of classes follows the following conventions:\n\n\n")
+    time.sleep(0.7)
     d.print("A class is denoted by a rectangle with the class name in bold at the top.\n\n")
     time.sleep(0.5)
     d.print("The main methods of the class appear under the class name. The properties are shown below the methods.\n\n")
@@ -444,15 +458,11 @@ def implement_design_pattern():
     time.sleep(0.5)
     d.print("Class inheritance is represented by a triangle that connects a subclass to its parent class.\n\n")
     time.sleep(0.5)
-    d.print("A reference to an object that represents an aggregation or part-whole relationship.\n\n")
+    d.print("A reference to an object that represents an aggregation or part-whole relationship. It is indicated by an arrow with a rhombus at its base.\n\n")
     time.sleep(0.5)
-    d.print("It is indicated by an arrow with a rhombus at its base.\n\n")
+    d.print("An arrow without a rhombus denotes association. If Class A points to Class B, it means Class A is using or talking to Class B.\n\n")
     time.sleep(0.5)
-    d.print("An arrow without a rhombus denotes association.\n\n")
-    time.sleep(0.5)
-    d.print("To show which classes create instances of others we use an arrow with a dotted line.\n\n")
-    time.sleep(0.5)
-    d.print("We call this the 'Create' relationship. The arrow points to the class that is being instantiated.\n\n")
+    d.print("To show which classes create instances of others we use an arrow with a dotted line. We call this the 'Create' relationship. The arrow points to the class that is being instantiated.\n\n")
     time.sleep(0.5)
     d.print("A filled circle represents 'more than one.' When the circle appears at the end of a reference, it means that there are many objects referenced or added.\n\n")
     time.sleep(0.5)
@@ -462,6 +472,7 @@ def implement_design_pattern():
     d.input()
     d.clear()
 
+    # diagram of objects
     d.print("Draw the diagram of objects. It shows a given object's structure in execution time.\n\n")
     time.sleep(0.5)
     d.print("An object diagram shows exclusively instances. Objects are named 'aSomething, where 'Something' is the class of the object.\n\n")
@@ -474,6 +485,7 @@ def implement_design_pattern():
     d.input()
     d.clear()
 
+    # diagram of interactions
     d.print("Draw the diagram of interactions. It shows the flow of messages between objects.\n\n")
     time.sleep(0.5)
     d.print("An interaction diagram shows the order in which requests between objects are executed.\n\n")
