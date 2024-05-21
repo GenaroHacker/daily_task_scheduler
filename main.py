@@ -69,19 +69,7 @@ if __name__ == "__main__":
 
     # Define weekly schedule using function keys
     weekly_schedule = {
-        "Monday": [
-            "design",
-            "plot",
-            "calligraphy",
-            "exam",
-            "design",
-            "shower",
-            "shave",
-            "brush",
-            "vitamins",
-            "water",
-            "meditation",
-        ],
+        "Monday": ["design", "gym"],
         "Tuesday": ["coffee", "breath"],
         "Wednesday": ["plot", "coffee", "files", "gtd"],
         "Thursday": ["plot", "coffee", "desk"],
