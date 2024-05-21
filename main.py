@@ -36,49 +36,59 @@ from task_functions.create import rank_projects
 from task_functions.create import transcribe_highlighted_text
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Map functions to function keys
     functions = {
-        'coffee': coffee,
-        'desk': organize_desk,
-        'files': organize_digital_files,
-        'pomodoro': pomodoro_session,
-        'gtd': get_things_done,
-        'progress': make_progress,
-        'rank': rank_projects,
-        'breath': breathing_exercise,
-        'plot': plot_metrics,
-        'eat': eat,
-        'gym': go_to_gym,
-        'pushups': do_40_pushups,
-        'loop': guitar_loop_note,
-        'leetcode': solve_leetcode_problem,
-        'gratitude': list_gratitude_journal,
-        'typing': practice_fast_typing,
-        'calligraphy': practice_calligraphy,
-        'exam': take_exam,
-        'design': implement_design_pattern,
-        'shower': get_a_shower,
-        'shave': shave_face,
-        'brush': brush_teeth,
-        'vitamins': take_vitamins,
-        'water': drink_water,
-        'meditation': practice_meditation,
-        'transcribe': transcribe_highlighted_text
+        "coffee": coffee,
+        "desk": organize_desk,
+        "files": organize_digital_files,
+        "pomodoro": pomodoro_session,
+        "gtd": get_things_done,
+        "progress": make_progress,
+        "rank": rank_projects,
+        "breath": breathing_exercise,
+        "plot": plot_metrics,
+        "eat": eat,
+        "gym": go_to_gym,
+        "pushups": do_40_pushups,
+        "loop": guitar_loop_note,
+        "leetcode": solve_leetcode_problem,
+        "gratitude": list_gratitude_journal,
+        "typing": practice_fast_typing,
+        "calligraphy": practice_calligraphy,
+        "exam": take_exam,
+        "design": implement_design_pattern,
+        "shower": get_a_shower,
+        "shave": shave_face,
+        "brush": brush_teeth,
+        "vitamins": take_vitamins,
+        "water": drink_water,
+        "meditation": practice_meditation,
+        "transcribe": transcribe_highlighted_text,
     }
-
 
     # Define weekly schedule using function keys
     weekly_schedule = {
-        "Monday": ['design', 'plot', 'calligraphy', 'exam', 'design', 'shower', 'shave', 'brush', 'vitamins', 'water', 'meditation'],
-        "Tuesday": ['coffee', 'breath'],
-        "Wednesday": ['plot', 'coffee', 'files', 'gtd'],
-        "Thursday": ['plot', 'coffee', 'desk'],
-        "Friday": ['plot', 'desk'],
-        "Saturday": ['plot', 'pomodoro'],
-        "Sunday": ['leetcode', 'loop']
+        "Monday": [
+            "design",
+            "plot",
+            "calligraphy",
+            "exam",
+            "design",
+            "shower",
+            "shave",
+            "brush",
+            "vitamins",
+            "water",
+            "meditation",
+        ],
+        "Tuesday": ["coffee", "breath"],
+        "Wednesday": ["plot", "coffee", "files", "gtd"],
+        "Thursday": ["plot", "coffee", "desk"],
+        "Friday": ["plot", "desk"],
+        "Saturday": ["plot", "pomodoro"],
+        "Sunday": ["leetcode", "loop"],
     }
 
     scheduler = Facade(weekly_schedule, functions)
     scheduler.execute_instructions()
-
