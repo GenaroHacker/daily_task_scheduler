@@ -111,7 +111,7 @@ def practice_meditation():
     time.sleep(5)
     d.play_sound(sound='tibetan_gong.wav')
     d.clear()
-    d.sleep(minutes=0.3)
+    d.sleep(minutes=30)
     d.play_sound(sound='tibetan_gong.wav')
     time.sleep(3)
     d.clear()
