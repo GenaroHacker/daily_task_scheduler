@@ -58,7 +58,7 @@ if __name__ == "__main__":
         "pushups": do_40_pushups,
         "loop": guitar_loop_note,
         "leetcode": solve_leetcode_problem,
-        "gratitude": list_gratitude_journal,
+        "list": list,
         "typing": practice_fast_typing,
         "calligraphy": practice_calligraphy,
         "exam": take_exam,
@@ -81,13 +81,13 @@ if __name__ == "__main__":
 
     # Define weekly schedule using function keys
     weekly_schedule = {
-        "Monday": ["water", "shower", "water", "coffee", "desk", "plot", "gtd", "rank", "water", "pomodoro", "water", "progress", "water", "eat", "gym", "water", "plot", "breath", "eat", "vitamins", "plot", "shave", "brush"],
-        "Tuesday": ["water", "shower", "water", "coffee", "desk", "plot", "files", "water", "pomodoro", "pushups", "water", "eat", "water", "progress", "typing", "water", "pomodoro", "water", "eat", "vitamins", "plot", "brush", "loop"],
-        "Wednesday": ["water", "shower", "breath", "water", "coffee", "meditation", "desk", "design", "gtd", "rank", "pomodoro", "water", "plot", "progress", "water", "eat", "gratitude", "gym", "water", "eat", "vitamins", "plot", "shave", "brush"],
-        "Thursday": ["water", "shower", "water", "coffee", "desk", "plot", "calligraphy", "water", "pomodoro", "water", "plot", "progress", "water", "eat", "water", "pomodoro", "pushups", "water", "eat", "vitamins", "plot", "brush"],
-        "Friday": ["water", "shower", "water", "coffee", "desk", "plot", "gtd", "rank", "water", "pomodoro", "water", "progress", "water", "transcribe", "eat", "water", "gym", "water", "eat", "vitamins", "plot", "shave", "brush"],
-        "Saturday": ["water", "shower", "water", "coffee", "desk", "leetcode", "plot", "water", "pomodoro", "water", "progress", "water", "eat", "loop", "water", "pomodoro", "pushups", "water", "eat", "vitamins", "plot", "brush"],
-        "Sunday": ["water", "shower", "water", "coffee", "desk", "progress", "water", "pomodoro", "water", "eat", "typing", "exam", "pushups", "water", "pomodoro", "eat", "vitamins", "plot", "brush"]
+        "Monday": [],
+        "Tuesday": [],
+        "Wednesday": [],
+        "Thursday": ["coffee"],
+        "Friday": [],
+        "Saturday": [],
+        "Sunday": []
     }
 
     scheduler = Facade(weekly_schedule, functions)

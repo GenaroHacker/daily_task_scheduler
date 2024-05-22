@@ -1,6 +1,7 @@
 from src.director import Director
 from src.decorator import track_function
 from task_functions.func_modules.gtd import GettingThingsDone
+from task_functions.func_modules.list import IdeaManager
 import time
 
 d = Director()
@@ -77,7 +78,9 @@ def transcribe_highlighted_text():
 
 @track_function
 def list():
-    pass
+    db_path = "assets/data/smark.db"
+    manager = IdeaManager(db_path)
+    manager.run()
 
 
 @track_function

@@ -20,13 +20,27 @@ d = Director()
 def coffee():
     current_time = time.strftime("%H:%M:%S")
     if current_time < "07:00:00":
-        d.print(
-            f"Good morning!\n\nIt's {time.strftime('%H:%M:%S')}.\n\nHow about a cup of coffee?"
-        )
-    elif current_time >= "07:00:00" and current_time < "10:30:00":
-        d.print(
-            f"It's {time.strftime('%H:%M:%S')}.\n\nYou are still in time for a cup of coffee if you want.\n\nContinue with the next task in your schedule once you're coffee is ready.\n\n"
-        )
+        d.print("Good morning!\n\n")
+        sleep(1)
+        d.print(f"It's {time.strftime('%H:%M:%S')}.\n\n")
+        sleep(1)
+        d.print("How about a cup of coffee?\n\n")
+        d.input()
+        d.clear()
+
+        d.print("What makes you feel grateful today?:")
+        input()
+        d.input()
+        d.clear()
+
+        import json
+        import random
+        file_path = 'task_functions/func_modules/wake_up_phrases.json'
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+        phrases = data.get('wake_up_phrases', [])
+        d.print(random.choice(phrases))
+
     else:
         d.print(
             f"It's {time.strftime('%H:%M:%S')}.\n\nYou should avoid drinking coffee now.\n\nIt's too late for that.\n\nContinue with the next task in your schedule instead.\n\n"
