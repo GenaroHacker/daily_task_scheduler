@@ -1,6 +1,7 @@
 from src.director import Director
 from src.decorator import track_function
 from task_functions.func_modules.gtd import GettingThingsDone
+import time
 
 d = Director()
 # d.clear()
@@ -72,3 +73,74 @@ def transcribe_highlighted_text():
         "Store the PDF to your summaries folder within your organization system.\n\n"
     )
     d.input()
+
+
+@track_function
+def list():
+    pass
+
+
+@track_function
+def make_the_bed():
+    d.print("Make the bed.\n\n")
+    d.input()
+
+
+@track_function
+def prepare_tomorrow_clothes():
+    d.print("Prepare your clothes for tomorrow.\n\n")
+    d.input()
+
+
+@track_function
+def clean_room():
+    d.print("Put on some good music")
+    d.input()
+    d.print("Prepare the cleaning tools:\n\n\n")
+    time.sleep(2)
+    d.print("- A mop bucket with new water\n\n")
+    time.sleep(1)
+    d.print("- A small bucket with water, a little bit of bleach and one cloth\n\n")
+    time.sleep(1)
+    d.print("- Paper towels and glass window cleaner\n\n")
+    time.sleep(1)
+    d.print("- A bag for the trash\n\n")
+    time.sleep(1)
+    d.input()
+    d.print("Put the desk things on the bed\n\n")
+    d.input()
+    d.print("Clean the window, the whiteboard and the mirror\n\n")
+    d.input()
+    d.print("Clean the desk\n\n")
+    d.input()
+    d.print("Put the desk things in the desk\n\n")
+    d.input()
+    d.print("Clean the furniture\n\n")
+    d.input()
+    d.print("Clean the floor\n\n")
+    d.input()
+    d.print("Take the trash out\n\n")
+    d.input()
+
+
+@track_function
+def washing_machine():
+    d.print("Do the laundry\n\n")
+    d.print("Decide what to wash\n\n\n")
+    time.sleep(2)
+    d.print("- Clothes\n\n")
+    time.sleep(1)
+    d.print("- Towels\n\n")
+    time.sleep(1)
+    d.print("- Bed sheets\n\n")
+    time.sleep(1)
+    d.input()
+    d.print("Put the clothes in the washing machine for 30 minutes\n\n")
+    d.input()
+    d.print("Set an alarm for 30 minutes from now\n\n")
+    d.input()
+    d.print("You can continue working with the rest of your tasks now.\n\n")
+    d.print("When the alarm goes off, put the clothes in the dryer.\n\n")
+    d.print("If you are busy when the alarm goes off, you may just take the clothes out of the washing machine and hang them to dry when you finish your task.")
+    d.input()
+

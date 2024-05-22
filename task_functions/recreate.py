@@ -109,8 +109,8 @@ def brush_teeth():
 
 
 @track_function
-def take_vitamins():
-    d.print("Take vitamins.\n\n")
+def take_supplements():
+    d.print("Take supplements.\n\n")
     d.input()
 
 

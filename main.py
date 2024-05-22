@@ -5,7 +5,6 @@ from src.facade import Facade
 from task_functions.practice import pomodoro_session
 from task_functions.practice import guitar_loop_note
 from task_functions.practice import solve_leetcode_problem
-from task_functions.practice import list_gratitude_journal
 from task_functions.practice import practice_fast_typing
 from task_functions.practice import practice_calligraphy
 from task_functions.practice import take_exam
@@ -23,7 +22,7 @@ from task_functions.recreate import eat
 from task_functions.recreate import get_a_shower
 from task_functions.recreate import shave_face
 from task_functions.recreate import brush_teeth
-from task_functions.recreate import take_vitamins
+from task_functions.recreate import take_supplements
 from task_functions.recreate import drink_water
 from task_functions.recreate import practice_meditation
 
@@ -34,6 +33,12 @@ from task_functions.create import get_things_done
 from task_functions.create import make_progress
 from task_functions.create import rank_projects
 from task_functions.create import transcribe_highlighted_text
+from task_functions.create import list
+from task_functions.create import make_the_bed
+from task_functions.create import prepare_tomorrow_clothes
+from task_functions.create import clean_room
+from task_functions.create import washing_machine
+
 
 
 if __name__ == "__main__":
@@ -61,11 +66,18 @@ if __name__ == "__main__":
         "shower": get_a_shower,
         "shave": shave_face,
         "brush": brush_teeth,
-        "vitamins": take_vitamins,
+        "supplements": take_supplements,
         "water": drink_water,
         "meditation": practice_meditation,
         "transcribe": transcribe_highlighted_text,
+        "bed": make_the_bed,
+        "clothes": prepare_tomorrow_clothes,
+        "clean": clean_room,
+        "wash": washing_machine
     }
+
+    wake_up = ["water", "shower", "water", "coffee", "desk", "plot", "gtd", "rank", "water", "pomodoro", "water", "progress", "water"]
+    ending = ["eat","water", "vitamins", "plot", "shave", "brush"]
 
     # Define weekly schedule using function keys
     weekly_schedule = {

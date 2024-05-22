@@ -186,26 +186,6 @@ def solve_leetcode_problem():
 
 
 @track_function
-def list_gratitude_journal():
-    d.print("Grab a pen and paper.\n\n")
-    d.input()
-    d.clear()
-    d.print("Write down the title 'Thanks for...' and the date.\n\n")
-    d.input()
-    d.clear()
-    for i in range(1, 11):
-        d.print(f"List item {i}:")
-        d.sleep(seconds=30)
-        d.clear()
-    d.print("Great job! You have completed your gratitude list.\n\n")
-    time.sleep(0.5)
-    d.print("You can store the list or discard it now.\n\n")
-    time.sleep(0.5)
-    d.input()
-    d.clear()
-
-
-@track_function
 def practice_fast_typing():
     d.print("Open typing.com and practice the recommended lesson.\n\n")
     d.open_webpage("https://www.typing.com/student/lessons")
