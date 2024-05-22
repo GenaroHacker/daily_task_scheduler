@@ -85,14 +85,24 @@ def list():
 
 @track_function
 def make_the_bed():
+    d.print("Open the blinds.\n\n")
+    d.input()
+    d.clear()
     d.print("Make the bed.\n\n")
     d.input()
 
 
 @track_function
 def prepare_tomorrow_clothes():
-    d.print("Prepare your clothes for tomorrow.\n\n")
+    d.print("Pick a T-shirt and leave it on the shelf.\n\n")
     d.input()
+    d.print("Pick a pair of pants and leave them on the shelf.\n\n")
+    d.input()
+    d.print("Pick a pair of socks and leave them on the shelf.\n\n")
+    d.input()
+    d.print("Pick up the underwear and put them on the shelf.\n\n")
+    d.input()
+
 
 
 @track_function

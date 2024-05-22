@@ -117,6 +117,7 @@ def shave_face():
     d.input()
 
 
+@track_function
 def brush_teeth():
     d.print("Brush teeth.\n\n")
     d.input()

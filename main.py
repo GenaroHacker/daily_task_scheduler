@@ -76,18 +76,18 @@ if __name__ == "__main__":
         "wash": washing_machine
     }
 
-    wake_up = ["water", "shower", "water", "coffee", "desk", "plot", "gtd", "rank", "water", "pomodoro", "water", "progress", "water"]
-    ending = ["eat","water", "vitamins", "plot", "shave", "brush"]
+    start = ["water", "bed", "shower", "water", "coffee", "desk", "plot", "gtd", "rank", "water", "pomodoro", "water", "progress", "water"]
+    end = ["water", "eat", "supplements", "water", "clothes", "brush", "shave", "plot"]
 
     # Define weekly schedule using function keys
     weekly_schedule = {
-        "Monday": [],
-        "Tuesday": [],
-        "Wednesday": [],
-        "Thursday": ["coffee"],
-        "Friday": [],
-        "Saturday": [],
-        "Sunday": []
+        "Monday": start + ["eat", "water", "breath", "gym"] + end,
+        "Tuesday": start + ["list", "pomodoro", "water", "eat", "loop", "pushups"] + end,
+        "Wednesday": start + ["list", "progress", "water", "eat", "gym", "water", "meditation"] + end,
+        "Thursday": start + ["list", "wash", "clean", "water", "pomodoro", "water", "eat", "calligraphy", "loop", "pushups"] + end,
+        "Friday": start + ["breath", "leetcode", "water", "eat", "gym", "water", "typing"] + end,
+        "Saturday": start + ["transcribe", "water", "pomodoro", "water", "eat", "exam", "water", "design", "pushups"] + end,
+        "Sunday": start + ["exam", "water", "design", "water", "pomodoro", "water", "eat"] + end
     }
 
     scheduler = Facade(weekly_schedule, functions)
