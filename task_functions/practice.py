@@ -39,13 +39,13 @@ def pomodoro_session():
 
     def handle_session(session_type, description, duration):
         if session_type == "focus":
+            d.play_sound(sound="beeps.wav")
             d.print(f"The {description} focus block starts now.\n\n")
         else:
+            d.play_sound(sound="alarm.wav")
             d.print(f"Take a {description} break for {duration} minutes.\n\n")
-
-        d.play_sound(sound="beeps.wav" if session_type == "focus" else "chimes.wav")
-        d.sleep(minutes=duration)
-        d.play_sound(sound="alarm.wav")
+        
+        d.sleep(seconds=duration)
         d.print(
             f"The {description} {'focus block' if session_type == 'focus' else 'break'} is over.\n\n"
         )
@@ -54,6 +54,7 @@ def pomodoro_session():
     # Execute each session according to the defined schedule
     for session_type, description, duration in sessions:
         handle_session(session_type, description, duration)
+    d.play_sound(sound="alarm.wav")
 
     d.print("Congratulations! You have completed a full Pomodoro session.\n\n")
     d.input()
