@@ -45,7 +45,7 @@ def pomodoro_session():
             d.play_sound(sound="alarm.wav")
             d.print(f"Take a {description} break for {duration} minutes.\n\n")
         
-        d.sleep(seconds=duration)
+        d.sleep(minutes=duration)
         d.print(
             f"The {description} {'focus block' if session_type == 'focus' else 'break'} is over.\n\n"
         )
