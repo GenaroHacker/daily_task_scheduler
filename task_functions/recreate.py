@@ -19,7 +19,7 @@ d = Director()
 @track_function
 def coffee():
     current_time = time.strftime("%H:%M:%S")
-    if current_time < "07:00:00":
+    if current_time < "21:00:00":
         d.print("Good morning!\n\n")
         sleep(1)
         d.print(f"It's {time.strftime('%H:%M:%S')}.\n\n")
@@ -33,14 +33,45 @@ def coffee():
         d.input()
         d.clear()
 
+        questions = [
+            "Who exemplifies this in your life?",
+            "How would you measure your progress in integrating this into your life?",
+            "How would you improve the idea?",
+            "How can you apply this today?",
+            "How can you simplify this?",
+            "What’s the simplest approach?",
+            "How does this benefit others?",
+            "What’s the core message here?"
+        ]
+
         import json
         import random
         file_path = 'task_functions/func_modules/wake_up_phrases.json'
         with open(file_path, 'r') as file:
             data = json.load(file)
         phrases = data.get('wake_up_phrases', [])
-        d.print(random.choice(phrases))
+        selected_phrase = random.choice(phrases)
+        selected_question = random.choice(questions)
 
+        d.print("Give yourself a moment to think about the following...\n\n")
+        time.sleep(1)
+        d.print(selected_question)
+        time.sleep(2)
+        print("\n\n")
+        d.print(selected_phrase)
+        time.sleep(4)
+        d.clear()
+
+        print("\n\n")
+        print(selected_question)
+        print("\n\n")
+        print(selected_phrase)
+        print("\n\n")
+        time.sleep(2)
+        d.sleep(seconds=60)
+        print("\n\n")
+        input(" ?: ")
+        time.sleep(1)
     else:
         d.print(
             f"It's {time.strftime('%H:%M:%S')}.\n\nYou should avoid drinking coffee now.\n\nIt's too late for that.\n\nContinue with the next task in your schedule instead.\n\n"
