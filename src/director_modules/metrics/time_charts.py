@@ -102,7 +102,12 @@ def plot_task_time_distribution(db_path):
         "#2a00ff",
     ]
 
-    # Assign colors to labels
+    # Define hatch patterns
+    hatch_patterns = [
+        '/', '\\', '|', '-', '+', 'x', 'o', 'O', '.', '*'
+    ]
+
+    # Assign colors and hatch patterns to labels
     all_labels = list(
         set(daily_total_time.index)
         | set(weekly_total_time.index)
@@ -111,15 +116,21 @@ def plot_task_time_distribution(db_path):
     colors = {
         label: color_list[i % len(color_list)] for i, label in enumerate(all_labels)
     }
+    hatches = {
+        label: hatch_patterns[i % len(hatch_patterns)] for i, label in enumerate(all_labels)
+    }
 
     # Plotting
-    fig, axs = plt.subplots(1, 3, figsize=(12, 6))
+    fig, axs = plt.subplots(1, 3, figsize=(18, 6))
 
     def plot_pie(ax, data, title):
         colors_for_pie = [colors[label] for label in data.index]
+        hatches_for_pie = [hatches[label] for label in data.index]
         wedges, texts, autotexts = ax.pie(
             data, startangle=140, autopct="%1.1f%%", colors=colors_for_pie
         )
+        for i, patch in enumerate(wedges):
+            patch.set_hatch(hatches_for_pie[i])
         ax.axis("equal")  # Equal aspect ratio ensures that pie is drawn as a circle.
         ax.set_title(title)
         ax.legend(
