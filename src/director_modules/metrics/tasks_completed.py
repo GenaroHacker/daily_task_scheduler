@@ -5,7 +5,6 @@ import sqlite3
 from datetime import datetime, timedelta
 import matplotlib.dates as mdates
 
-
 def plot_event_schedule(db_path, days_range=None):
     # Connect to the database
     conn = sqlite3.connect(db_path)
@@ -38,9 +37,7 @@ def plot_event_schedule(db_path, days_range=None):
         day_events = df[df["date"] == date]
         for function_name in day_events["function_name"].unique():
             task_events = day_events[day_events["function_name"] == function_name]
-            start_times = task_events[task_events["action_type"] == "start"][
-                "timestamp"
-            ]
+            start_times = task_events[task_events["action_type"] == "start"]["timestamp"]
             end_times = task_events[task_events["action_type"] == "end"]["timestamp"]
             for start, end in zip(start_times, end_times):
                 schedule[date].append((start, end, function_name))
@@ -69,13 +66,22 @@ def plot_event_schedule(db_path, days_range=None):
     # Generate random colors for additional tasks if necessary
     total_tasks = len(sorted_tasks)  # Total number of tasks
     if total_tasks > len(color_list):
-        additional_colors = plt.cm.rainbow(
-            np.linspace(0, 1, total_tasks - len(color_list))
-        )
+        additional_colors = plt.cm.rainbow(np.linspace(0, 1, total_tasks - len(color_list)))
         color_list.extend(additional_colors)
 
-    # Assign colors to tasks
+    # Define hatch patterns
+    hatch_patterns = [
+        '/', '\\', '|', '-', '+', 'x', 'o', 'O', '.', '*'
+    ]
+
+    # Extend hatch patterns if necessary
+    if total_tasks > len(hatch_patterns):
+        hatch_patterns *= (total_tasks // len(hatch_patterns) + 1)
+        hatch_patterns = hatch_patterns[:total_tasks]
+
+    # Assign colors and hatch patterns to tasks
     colors = {task: color_list[i] for i, (task, _) in enumerate(sorted_tasks)}
+    hatches = {task: hatch_patterns[i] for i, (task, _) in enumerate(sorted_tasks)}
 
     # Sort dates for plotting
     unique_dates = sorted(unique_dates)
@@ -95,6 +101,7 @@ def plot_event_schedule(db_path, days_range=None):
                     bottom=start_hour,
                     color=colors[function_name],
                     edgecolor="grey",
+                    hatch=hatches[function_name],
                     label=function_name,
                 )
 
