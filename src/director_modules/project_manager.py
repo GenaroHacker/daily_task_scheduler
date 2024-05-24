@@ -253,3 +253,34 @@ class ProjectDatabaseManager:
 
             conn.commit()
             print("Projects have been successfully re-ranked based on user input.")
+
+            # Display ranked projects
+            for rank, project_name in enumerate(sorted_projects, start=1):
+                print(f"[ {rank} ] {project_name}")
+
+            while True:
+                response = input("Enter the number of the project to delete from or press Enter to continue: ").strip()
+                if response == "":
+                    return
+                if response.isdigit() and 1 <= int(response) <= len(sorted_projects):
+                    delete_from_index = int(response) - 1
+                    projects_to_delete = sorted_projects[delete_from_index:]
+                    print("Projects to delete:")
+                    for project in projects_to_delete:
+                        print(f"- {project}")
+                    keyword = input("Type 'CONFIRM' to delete these projects: ")
+                    if keyword == 'CONFIRM':
+                        for project in projects_to_delete:
+                            project_id = cursor.execute(
+                                "SELECT id FROM table_projects WHERE name = ?", (project,)
+                            ).fetchone()[0]
+                            self.delete_project(project_id)
+                        print("Projects deleted.")
+                        break
+                    else:
+                        os.system('clear')
+                        for rank, project_name in enumerate(sorted_projects, start=1):
+                            print(f"[ {rank} ] {project_name}")
+                else:
+                    print("Invalid input. Try again.")
+
