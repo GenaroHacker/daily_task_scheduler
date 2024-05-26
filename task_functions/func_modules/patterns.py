@@ -22,7 +22,7 @@ def implement_design_pattern():
     patterns = {
         "Creational": [
             {
-                "name": "Abstract Factory",
+                "name": "Abstract factory",
                 "definition": "Interface to create families of related or dependent objects without specifying their concrete classes",
                 "aspects": "Families of product objects",
                 "participants": "AbstractFactory, ConcreteFactory, AbstractProduct, ConcreteProduct",
@@ -34,7 +34,7 @@ def implement_design_pattern():
                 "participants": "Builder, ConcreteBuilder, Director, Product",
             },
             {
-                "name": "Factory Method",
+                "name": "Factory method",
                 "definition": "Define an interface for creating an object and let subclasses decide which class to instantiate",
                 "aspects": "Subclass of object that is instantiated",
                 "participants": "Creator, ConcreteCreator, Product, ConcreteProduct",
@@ -98,7 +98,7 @@ def implement_design_pattern():
         ],
         "Behavioral": [
             {
-                "name": "Chain of Responsibility",
+                "name": "Chain of responsibility",
                 "definition": "Command pass through processing objects until one handles it",
                 "aspects": "Object that can process a request",
                 "participants": "Handler, ConcreteHandler",
@@ -152,7 +152,7 @@ def implement_design_pattern():
                 "participants": "Strategy, ConcreteStrategy, Context",
             },
             {
-                "name": "Template Method",
+                "name": "Template method",
                 "definition": "Method in an abstract class that defines the skeleton of an operation",
                 "aspects": "Steps of an algorithm",
                 "participants": "AbstractClass, ConcreteClass",
