@@ -36,7 +36,7 @@ def coffee():
         questions = [
             "Who exemplifies this in your life?",
             "How would you measure your progress in integrating this into your life?",
-            "How would you improve the idea?",
+            "How would you expand the idea?",
             "How can you apply this today?",
             "How can you simplify this?",
             "What’s the simplest approach?",
@@ -116,16 +116,6 @@ def breathing_exercise():
     d.print("Enjoy the rest of your day!\n")
     sleep(0.3)
     d.input()
-
-
-@track_function
-def plot_metrics():
-    d.plot_time_worked()
-    d.plot_event_schedule()
-    d.plot_start_and_end_hours()
-    d.plot_task_time_distribution()
-    d.plot_work_vs_break_time_distribution()
-    d.plot_daily_skipped_vs_completed_tasks()
 
 
 @track_function

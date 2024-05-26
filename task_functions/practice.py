@@ -1,6 +1,5 @@
 from src.director import Director
 from src.decorator import track_function
-from task_functions.func_modules.patterns import implement_design_pattern
 import time
 
 d = Director()
@@ -211,6 +210,3 @@ def take_exam():
     d.input()
 
 
-@track_function
-def implement_gof_pattern():
-    implement_design_pattern()

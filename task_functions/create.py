@@ -1,7 +1,5 @@
 from src.director import Director
 from src.decorator import track_function
-from task_functions.func_modules.gtd import GettingThingsDone
-from task_functions.func_modules.list import IdeaManager
 import time
 
 d = Director()
@@ -37,22 +35,6 @@ def organize_digital_files():
 
 
 @track_function
-def get_things_done(db_path="assets/data/smark.db"):
-    gtd = GettingThingsDone(db_path)
-    gtd.run()
-
-
-@track_function
-def make_progress():
-    d.make_progress()
-
-
-@track_function
-def rank_projects():
-    d.rank_projects()
-
-
-@track_function
 def transcribe_highlighted_text():
     d.print("Pick a book already read and highlighted.\n\n")
     d.input()
@@ -77,13 +59,6 @@ def transcribe_highlighted_text():
 
 
 @track_function
-def list():
-    db_path = "assets/data/smark.db"
-    manager = IdeaManager(db_path)
-    manager.run()
-
-
-@track_function
 def make_the_bed():
     d.print("Open the blinds.\n\n")
     d.input()
@@ -102,7 +77,6 @@ def prepare_tomorrow_clothes():
     d.input()
     d.print("Pick up the underwear and put them on the shelf.\n\n")
     d.input()
-
 
 
 @track_function
