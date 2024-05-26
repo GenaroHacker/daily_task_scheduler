@@ -27,7 +27,7 @@ def make_progress():
 
 
 @track_function
-def list():
+def list_ideas():
     db_path = "assets/data/smark.db"
     manager = IdeaManager(db_path)
     manager.run()
