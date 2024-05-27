@@ -164,3 +164,4 @@ class GettingThingsDone:
         self.d.print("Tasks to discard as trash:")
         for discarded in self.trash:
             self.d.print(f"- {discarded}")
+        self.d.clear()
