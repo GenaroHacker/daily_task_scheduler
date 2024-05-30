@@ -1,12 +1,7 @@
-# Ignore all private.py files
 **/private.py
-
-# Ignore Python cache files
+main_private.py
+smark.db
 __pycache__/
 *.py[cod]
-
-# Ignore JSON state and data files
 *.json
-
-# Do not ignore the top_1000_words.json file
 !assets/data/top_1000_words.json
