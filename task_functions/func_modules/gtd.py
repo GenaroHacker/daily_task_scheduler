@@ -1,7 +1,6 @@
 from src.director import Director
 import sqlite3
 
-
 class GettingThingsDone:
     def __init__(self, db_path):
         self.db_path = db_path
@@ -53,6 +52,7 @@ class GettingThingsDone:
 
     def determine_next_steps(self):
         self.d.clear()
+        new_project_added = False
         if self.actionables:
             for item in self.actionables:
                 if item in self.quick_tasks:
@@ -65,6 +65,8 @@ class GettingThingsDone:
                     )
                     self.d.start_new_project(item, next_step)
                     self.long_tasks.append(item)
+                    new_project_added = True
+        return new_project_added
 
     def process_quick_tasks(self):
         self.d.clear()
@@ -155,7 +157,7 @@ class GettingThingsDone:
         self.capture_items()
         self.categorize_items()
         self.process_quick_tasks()
-        self.determine_next_steps()
+        new_project_added = self.determine_next_steps()
         self.process_non_actionables()
         self.save_references()
         self.execute_quick_tasks()
@@ -165,3 +167,5 @@ class GettingThingsDone:
         for discarded in self.trash:
             self.d.print(f"- {discarded}")
         self.d.clear()
+        return new_project_added
+

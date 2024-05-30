@@ -17,8 +17,10 @@ d = Director()
 @track_function
 def get_things_done(db_path="assets/data/smark.db"):
     gtd = GettingThingsDone(db_path)
-    gtd.run()
-    d.rank_projects()
+    new_project_added = gtd.run()
+    # rank projects only if new projects were added
+    if new_project_added:
+        gtd.d.rank_projects()
 
 
 @track_function
