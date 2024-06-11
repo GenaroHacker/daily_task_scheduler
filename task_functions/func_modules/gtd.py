@@ -1,5 +1,6 @@
 from src.director import Director
 import sqlite3
+from datetime import datetime
 
 class GettingThingsDone:
     def __init__(self, db_path):
@@ -8,7 +9,8 @@ class GettingThingsDone:
         self.actionables = []
         self.non_actionables = []
         self.quick_tasks = []
-        self.long_tasks = []
+        self.long_tasks_today = []
+        self.long_tasks_future = []
         self.reference_materials = []
         self.trash = []
         self.d = Director()
@@ -60,11 +62,10 @@ class GettingThingsDone:
                 if self.d.project_exists(item):
                     print(f"Project '{item}' already exists. Skipping...")
                 else:
-                    next_step = input(
-                        f"What is the next step for the project '{item}'? "
-                    )
-                    self.d.start_new_project(item, next_step)
-                    self.long_tasks.append(item)
+                    if self.input_yes_no(f"Does the item '{item}' need to be finished today? (y/n): "):
+                        self.long_tasks_today.append(item)
+                    else:
+                        self.long_tasks_future.append(item)
                     new_project_added = True
         return new_project_added
 
@@ -153,6 +154,17 @@ class GettingThingsDone:
                 self.d.print("Invalid ID. Please try again.")
                 self.d.clear()
 
+    def display_long_tasks_today(self):
+        self.d.clear()
+        if not self.long_tasks_today:
+            self.d.print("No tasks to be finished today.")
+            return
+        self.d.print("Tasks to be finished today:")
+        for task in self.long_tasks_today:
+            self.d.print(f"- {task}")
+        current_date = datetime.now().strftime("%A, %Y-%m-%d")
+        self.d.print(f"Write these down as a checklist on the whiteboard. Today's date is {current_date}. Use this as the title of the checklist.")
+
     def run(self):
         self.capture_items()
         self.categorize_items()
@@ -162,10 +174,10 @@ class GettingThingsDone:
         self.save_references()
         self.execute_quick_tasks()
         self.review_references()
+        self.display_long_tasks_today()
         self.d.clear()
         self.d.print("Tasks to discard as trash:")
         for discarded in self.trash:
             self.d.print(f"- {discarded}")
         self.d.clear()
         return new_project_added
-
