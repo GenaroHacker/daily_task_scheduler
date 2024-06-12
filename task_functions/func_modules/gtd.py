@@ -66,7 +66,7 @@ class GettingThingsDone:
                         self.long_tasks_today.append(item)
                     else:
                         self.long_tasks_future.append(item)
-                    new_project_added = True
+                        new_project_added = True
         return new_project_added
 
     def process_quick_tasks(self):
