@@ -164,6 +164,7 @@ class GettingThingsDone:
             self.d.print(f"- {task}")
         current_date = datetime.now().strftime("%A, %Y-%m-%d")
         self.d.print(f"Write these down as a checklist on the whiteboard. Today's date is {current_date}. Use this as the title of the checklist.")
+        self.d.input()
 
     def run(self):
         self.capture_items()
